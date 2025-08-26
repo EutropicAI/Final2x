@@ -39,7 +39,7 @@
     "systeminformation": "^5.27.7",
     "tree-kill": "^1.2.2",
     "vfonts": "^0.0.3",
-    "vue": "^3.5.19",
+    "vue": "^3.5.20",
     "vue-i18n": "^11.1.11",
     "vue-router": "^4.5.1"
   },
