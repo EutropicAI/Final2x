@@ -7,17 +7,17 @@
 ![MacOS](https://img.shields.io/badge/Support-MacOS-blue?logo=Apple&style=flat-square)
 ![Windows](https://img.shields.io/badge/Support-Windows-blue?logo=Windows&style=flat-square)
 ![Linux](https://img.shields.io/badge/Support-Linux-blue?logo=Linux&style=flat-square)
-[![CI-test](https://github.com/TensoRaws/Final2x/actions/workflows/CI-test.yml/badge.svg)](https://github.com/TensoRaws/Final2x/actions/workflows/CI-test.yml)
-[![CI-build](https://github.com/TensoRaws/Final2x/actions/workflows/CI-build.yml/badge.svg)](https://github.com/TensoRaws/Final2x/actions/workflows/CI-build.yml)
-[![Release](https://github.com/TensoRaws/Final2x/actions/workflows/Release.yml/badge.svg)](https://github.com/TensoRaws/Final2x/actions/workflows/Release.yml)
+[![CI-test](https://github.com/EutropicAI/Final2x/actions/workflows/CI-test.yml/badge.svg)](https://github.com/EutropicAI/Final2x/actions/workflows/CI-test.yml)
+[![CI-build](https://github.com/EutropicAI/Final2x/actions/workflows/CI-build.yml/badge.svg)](https://github.com/EutropicAI/Final2x/actions/workflows/CI-build.yml)
+[![Release](https://github.com/EutropicAI/Final2x/actions/workflows/Release.yml/badge.svg)](https://github.com/EutropicAI/Final2x/actions/workflows/Release.yml)
 ![Download](https://img.shields.io/github/downloads/TensoRaws/Final2x/total)
 ![GitHub](https://img.shields.io/github/license/TensoRaws/Final2x)
 
 A cross-platform image super-resolution tool.
 
-- News🎉: Enhance a video? Try [VSET](https://github.com/TensoRaws/VSET)!
+- News🎉: Enhance a video? Try [VSET](https://github.com/EutropicAI/VSET)!
 - News🎉: Final2x v3.0.0 is now available, support Nvidia 50 series GPUs now!
-- News🎉: We are thrilled to announce the release of Final2x v2.0.0, which marks a major milestone as we transition to utilizing [ccrestoration](https://github.com/TensoRaws/ccrestoration) (PyTorch) for our algorithm implementation.
+- News🎉: We are thrilled to announce the release of Final2x v2.0.0, which marks a major milestone as we transition to utilizing [ccrestoration](https://github.com/EutropicAI/ccrestoration) (PyTorch) for our algorithm implementation.
 
 ### Screenshots
 
@@ -28,7 +28,7 @@ A cross-platform image super-resolution tool.
 
 ### Installation
 
-##### [Download the latest release from here.](https://github.com/TensoRaws/Final2x/releases)
+##### [Download the latest release from here.](https://github.com/EutropicAI/Final2x/releases)
 
 #### Windows
 
@@ -66,8 +66,8 @@ apt install -y libomp5 xdg-utils
 
 The following references were referenced in the development of this project:
 
-- [Final2x-core](https://github.com/TensoRaws/Final2x-core)
-- [ccrestoration](https://github.com/TensoRaws/ccrestoration)
+- [Final2x-core](https://github.com/EutropicAI/Final2x-core)
+- [ccrestoration](https://github.com/EutropicAI/ccrestoration)
 - [PyTorch](https://github.com/pytorch/pytorch)
 - [ncnn](https://github.com/Tencent/ncnn)
 - [naive-ui](https://github.com/tusen-ai/naive-ui)
@@ -76,7 +76,7 @@ The following references were referenced in the development of this project:
 ### License
 
 This project is licensed under the BSD 3-Clause - see
-the [LICENSE file](https://github.com/TensoRaws/Final2x/blob/main/LICENSE) for details.
+the [LICENSE file](https://github.com/EutropicAI/Final2x/blob/main/LICENSE) for details.
 
 ### Acknowledgements
 
