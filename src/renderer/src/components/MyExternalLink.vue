@@ -3,11 +3,11 @@ import { FilmOutline } from '@vicons/ionicons5'
 
 class openWebsite {
   static async FinalRip(): Promise<void> {
-    window.open('https://github.com/TensoRaws/FinalRip', '_blank')
+    window.open('https://github.com/EutropicAI/FinalRip', '_blank')
   }
 
   static async VSET(): Promise<void> {
-    window.open('https://github.com/TensoRaws/VSET', '_blank')
+    window.open('https://github.com/EutropicAI/VSET', '_blank')
   }
 }
 </script>

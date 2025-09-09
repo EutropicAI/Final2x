@@ -1,4 +1,4 @@
-// download Final2x-core from https://github.com/TensoRaws/Final2x-core/releases
+// download Final2x-core from https://github.com/EutropicAI/Final2x-core/releases
 // and put it in resources folder
 
 const fetch = (...args) => import('node-fetch').then(({ default: fetch }) => fetch(...args))
@@ -9,9 +9,9 @@ const path = require('node:path')
 
 const coreDict = {
   'macos-arm64':
-    'https://github.com/TensoRaws/Final2x-core/releases/download/2025-08-15/Final2x-core-macos-arm64.7z',
+    'https://github.com/EutropicAI/Final2x-core/releases/download/2025-08-15/Final2x-core-macos-arm64.7z',
   'windows-x64':
-    'https://github.com/TensoRaws/Final2x-core/releases/download/2025-08-15/Final2x-core-windows-x64.7z',
+    'https://github.com/EutropicAI/Final2x-core/releases/download/2025-08-15/Final2x-core-windows-x64.7z',
 }
 
 console.log('-'.repeat(50))
