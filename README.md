@@ -76,7 +76,7 @@ The following references were referenced in the development of this project:
 ### License
 
 This project is licensed under the BSD 3-Clause - see
-the [LICENSE file](https://github.com/EutropicAI/Final2x/blob/main/LICENSE) for details.
+the [LICENSE file](./LICENSE) for details.
 
 ### Acknowledgements
 
@@ -84,8 +84,8 @@ Feel free to reach out to the project maintainers with any questions or concerns
 
 <a href="https://star-history.com/#TensoRaws/Final2x&Date">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=TensoRaws/Final2x&type=Date&theme=dark" />
-    <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=TensoRaws/Final2x&type=Date" />
-    <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=TensoRaws/Final2x&type=Date" />
+    <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=EutropicAI/Final2x&type=Date&theme=dark" />
+    <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=EutropicAI/Final2x&type=Date" />
+    <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=EutropicAI/Final2x&type=Date" />
   </picture>
 </a>
