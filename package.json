@@ -4,7 +4,7 @@
   "version": "3.0.0",
   "description": "A cross-platform image super-resolution tool.",
   "author": "Tohrusky",
-  "homepage": "https://github.com/TensoRaws/Final2x",
+  "homepage": "https://github.com/EutropicAI/Final2x",
   "main": "./out/main/index.js",
   "engines": {
     "node": ">=18",
