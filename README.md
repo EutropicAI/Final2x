@@ -31,7 +31,7 @@ A cross-platform image super-resolution tool.
 
 #### Windows
 
-Btw, you can use some package mananger to install and upgrade such as winget or scoop. Notice that they may not be the latest version.
+You can also use a package manager like winget or scoop to install and upgrade. Please note that the versions available through package managers may not always be the latest.
 
 #### MacOS
 
