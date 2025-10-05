@@ -11,7 +11,7 @@ import { saveFormatList, torchDeviceList } from '../utils/SROptions'
 
 const { openOutputFolder }
   = storeToRefs(useGlobalSettingsStore())
-const { selectedSRModel, ghProxy, targetScale, selectedTorchDevice, useTile, saveFormat, useCustomModelPath } = storeToRefs(useSRSettingsStore())
+const { selectedSRModel, ghProxy, targetScale, selectedTorchDevice, useTile, saveFormat } = storeToRefs(useSRSettingsStore())
 const { outputpath } = storeToRefs(useIOPathStore())
 const { t } = useI18n()
 
