@@ -40,7 +40,14 @@ function getPath(): void {
         <n-button dashed type="success" style="width: 80px">
           {{ t('Final2xSettings.text11') }}
         </n-button>
-        <n-select v-model:value="selectedSRModel" :options="modelOptions" style="width: 465px" />
+        <n-select
+          v-model:value="selectedSRModel"
+          :options="modelOptions"
+          filterable
+          tag
+          clearable
+          style="width: 465px"
+        />
       </n-space>
 
       <n-space>
