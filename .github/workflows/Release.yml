@@ -2,17 +2,11 @@ name: Release
 
 on:
   workflow_dispatch:
+  push:
+    tags:
+      - 'v*'
 
 jobs:
-  setup:
-    runs-on: ubuntu-latest
-    outputs:
-      DATE: ${{ steps.get_date.outputs.DATE }}
-    steps:
-      - name: Get current date
-        id: get_date
-        run: echo "DATE=$(date +'%Y-%m-%d')" >> $GITHUB_OUTPUT
-
   windows:
     strategy:
       matrix:
@@ -181,8 +175,8 @@ jobs:
           name: Final2x-linux-pip-${{ matrix.os-version }}-unpacked
           path: dist/linux-unpacked/*.7z
 
-  Release:
-    needs: [setup, windows, macos, linux-pip]
+  github:
+    needs: [windows, macos, linux-pip]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/download-artifact@v4
@@ -199,9 +193,4 @@ jobs:
       - name: Create Release and Upload Release Asset
         uses: softprops/action-gh-release@v2
         with:
-          name: Release ${{ needs.setup.outputs.DATE }}
-          tag_name: ${{ needs.setup.outputs.DATE }}
-          body: Auto Release.
-          draft: false
-          prerelease: false
           files: dist/*

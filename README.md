@@ -15,7 +15,7 @@
 
 A cross-platform image super-resolution tool.
 
-- News🎉: Enhance a video? Try [VSET](https://github.com/EutropicAI/VSET)!
+- News🎉: Final2x v4.0.0 is now available! It uses the [cccv](https://github.com/EutropicAI/cccv) backend, supporting custom models and more. See [custom model demo](https://github.com/EutropicAI/cccv_demo_remote_model).
 - News🎉: Final2x v3.0.0 is now available, support Nvidia 50 series GPUs now!
 
 ### Screenshots
@@ -47,7 +47,7 @@ In first time, you need to run the command above in terminal to allow the app to
 
 For Linux User, you need to install the dependencies first.
 
-Make sure you have Python >= 3.9 and PyTorch >= 1.13 installed
+Make sure you have Python >= 3.9 and PyTorch >= 2.0 installed
 
 ```bash
 pip install Final2x-core
