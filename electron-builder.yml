@@ -62,4 +62,6 @@ linux:
 appImage:
   artifactName: ${name}-${version}.${ext}
 
+publish: null
+
 npmRebuild: false

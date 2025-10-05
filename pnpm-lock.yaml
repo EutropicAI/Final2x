@@ -56,13 +56,13 @@ importers:
         version: 5.4.1(@vue/compiler-sfc@3.5.22)(eslint@9.37.0)(typescript@5.9.3)(vitest@3.2.4(@types/debug@4.1.12)(@types/node@24.6.2)(jsdom@26.1.0)(sass@1.93.2)(yaml@2.8.1))
       '@electron-toolkit/preload':
         specifier: ^3.0.2
-        version: 3.0.2(electron@28.3.3)
+        version: 3.0.2(electron@27.3.11)
       '@electron-toolkit/tsconfig':
         specifier: ^1.0.1
         version: 1.0.1(@types/node@24.6.2)
       '@electron-toolkit/utils':
         specifier: ^4.0.0
-        version: 4.0.0(electron@28.3.3)
+        version: 4.0.0(electron@27.3.11)
       '@electron/notarize':
         specifier: ^2.5.0
         version: 2.5.0
@@ -76,8 +76,8 @@ importers:
         specifier: ^2.4.6
         version: 2.4.6
       electron:
-        specifier: ^28.3.3
-        version: 28.3.3
+        specifier: ^27.3.11
+        version: 27.3.11
       electron-builder:
         specifier: ^26.0.12
         version: 26.0.12(electron-builder-squirrel-windows@26.0.12)
@@ -1651,8 +1651,8 @@ packages:
     resolution: {integrity: sha512-bO3y10YikuUwUuDUQRM4KfwNkKhnpVO7IPdbsrejwN9/AABJzzTQ4GeHwyzNSrVO+tEH3/Np255a3sVZpZDjvg==}
     engines: {node: '>=8.0.0'}
 
-  electron@28.3.3:
-    resolution: {integrity: sha512-ObKMLSPNhomtCOBAxFS8P2DW/4umkh72ouZUlUKzXGtYuPzgr1SYhskhFWgzAsPtUzhL2CzyV2sfbHcEW4CXqw==}
+  electron@27.3.11:
+    resolution: {integrity: sha512-E1SiyEoI8iW5LW/MigCr7tJuQe7+0105UjqY7FkmCD12e2O6vtUbQ0j05HaBh2YgvkcEVgvQ2A8suIq5b5m6Gw==}
     engines: {node: '>= 12.20.55'}
     hasBin: true
 
@@ -3959,17 +3959,17 @@ snapshots:
       ajv: 6.12.6
       ajv-keywords: 3.5.2(ajv@6.12.6)
 
-  '@electron-toolkit/preload@3.0.2(electron@28.3.3)':
+  '@electron-toolkit/preload@3.0.2(electron@27.3.11)':
     dependencies:
-      electron: 28.3.3
+      electron: 27.3.11
 
   '@electron-toolkit/tsconfig@1.0.1(@types/node@24.6.2)':
     dependencies:
       '@types/node': 24.6.2
 
-  '@electron-toolkit/utils@4.0.0(electron@28.3.3)':
+  '@electron-toolkit/utils@4.0.0(electron@27.3.11)':
     dependencies:
-      electron: 28.3.3
+      electron: 27.3.11
 
   '@electron/asar@3.2.18':
     dependencies:
@@ -5444,7 +5444,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  electron@28.3.3:
+  electron@27.3.11:
     dependencies:
       '@electron/get': 2.0.3
       '@types/node': 18.19.129
