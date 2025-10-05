@@ -21,12 +21,12 @@
     "build": "electron-vite build",
     "postinstall": "electron-builder install-app-deps",
     "fetchcore": "node ./resources/download-core.js",
-    "build:mac-arm64": "pnpm run build && electron-builder --mac --arm64",
-    "build:mac-x64": "pnpm run build && electron-builder --mac --x64",
-    "build:win-arm64": "pnpm run build && electron-builder --win --arm64 --dir",
-    "build:win-x64": "pnpm run build && electron-builder --win --x64 --dir",
-    "build:linux-x64": "pnpm run build && electron-builder --linux --x64",
-    "build:linux-arm64": "pnpm run build && electron-builder --linux --arm64"
+    "build:mac-arm64": "pnpm run build && electron-builder --mac --arm64 --publish=never",
+    "build:mac-x64": "pnpm run build && electron-builder --mac --x64 --publish=never",
+    "build:win-arm64": "pnpm run build && electron-builder --win --arm64 --dir --publish=never",
+    "build:win-x64": "pnpm run build && electron-builder --win --x64 --dir --publish=never",
+    "build:linux-x64": "pnpm run build && electron-builder --linux --x64 --publish=never",
+    "build:linux-arm64": "pnpm run build && electron-builder --linux --arm64 --publish=never"
   },
   "dependencies": {
     "@intlify/unplugin-vue-i18n": "^6.0.8",
