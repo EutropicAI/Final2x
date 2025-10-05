@@ -47,7 +47,7 @@ In first time, you need to run the command above in terminal to allow the app to
 
 For Linux User, you need to install the dependencies first.
 
-Make sure you have Python >= 3.9 and PyTorch >= 1.13 installed
+Make sure you have Python >= 3.9 and PyTorch >= 2.0 installed
 
 ```bash
 pip install Final2x-core
