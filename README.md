@@ -15,7 +15,7 @@
 
 A cross-platform image super-resolution tool.
 
-- News🎉: Enhance a video? Try [VSET](https://github.com/EutropicAI/VSET)!
+- News🎉: Final2x v4.0.0 is now available, now we use [cccv](https://github.com/EutropicAI/cccv) as backend, support custom models and more features! See demo custom model here [cccv_demo_remote_model](https://github.com/EutropicAI/cccv_demo_remote_model)
 - News🎉: Final2x v3.0.0 is now available, support Nvidia 50 series GPUs now!
 
 ### Screenshots
