@@ -74,10 +74,10 @@ the [LICENSE file](./LICENSE) for details.
 
 Feel free to reach out to the project maintainers with any questions or concerns~
 
-<a href="https://star-history.com/#EutropicAI/Final2x&Date">
+<a href="https://star-history.dera.page/#EutropicAI/Final2x&Date">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=EutropicAI/Final2x&type=Date&theme=dark" />
-    <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=EutropicAI/Final2x&type=Date" />
-    <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=EutropicAI/Final2x&type=Date" />
+    <source media="(prefers-color-scheme: dark)" srcset="https://star-history.dera.page/svg?repos=EutropicAI/Final2x&type=Date&theme=dark" />
+    <source media="(prefers-color-scheme: light)" srcset="https://star-history.dera.page/svg?repos=EutropicAI/Final2x&type=Date" />
+    <img alt="Star History Chart" src="https://star-history.dera.page/svg?repos=EutropicAI/Final2x&type=Date" />
   </picture>
 </a>
