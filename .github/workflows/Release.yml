@@ -34,10 +34,6 @@ jobs:
 
   windows:
     needs: validate
-    strategy:
-      fail-fast: false
-      matrix:
-        arch: [x64, arm64]
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v4
@@ -68,25 +64,22 @@ jobs:
         run: Copy-Item core\dist\Final2x-core resources\Final2x-core -Recurse
 
       - name: Build desktop app
-        run: pnpm run build:win-${{ matrix.arch }}
+        run: pnpm run build:win-x64
         env:
           GH_TOKEN: ${{ github.token }}
 
       - name: Archive unpacked app
         shell: pwsh
         run: |
-          $directory = if ('${{ matrix.arch }}' -eq 'x64') { 'dist/win-unpacked' } else { 'dist/win-arm64-unpacked' }
-          Push-Location $directory
-          7z a -mx=1 -v1900m -r "Final2x-windows-${{ matrix.arch }}-unpacked.7z" *
+          Push-Location dist\win-unpacked
+          7z a -r "Final2x-windows-x64-unpacked.7z" *
           Pop-Location
 
       - name: Upload unpacked app
         uses: actions/upload-artifact@v4
         with:
-          name: Final2x-windows-${{ matrix.arch }}-unpacked
-          path: |
-            dist/win-unpacked/Final2x-windows-${{ matrix.arch }}-unpacked.7z.*
-            dist/win-arm64-unpacked/Final2x-windows-${{ matrix.arch }}-unpacked.7z.*
+          name: Final2x-windows-x64-unpacked
+          path: dist/win-unpacked/Final2x-windows-x64-unpacked.7z
 
   macos:
     needs: validate
@@ -130,7 +123,7 @@ jobs:
       - name: Archive unpacked app
         run: |
           cd dist/mac-arm64
-          7z a -mx=1 -r Final2x-macos-arm64-unpacked.7z ./*
+          7z a -r Final2x-macos-arm64-unpacked.7z ./*
 
       - name: Upload dmg
         uses: actions/upload-artifact@v4
@@ -173,7 +166,7 @@ jobs:
       - name: Archive unpacked app
         run: |
           cd dist/linux-unpacked
-          7z a -mx=1 -r Final2x-linux-pip-x64-unpacked.7z ./*
+          7z a -r Final2x-linux-pip-x64-unpacked.7z ./*
 
       - name: Upload packages
         uses: actions/upload-artifact@v4

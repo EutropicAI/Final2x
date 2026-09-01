@@ -16,10 +16,6 @@ permissions:
 
 jobs:
   windows:
-    strategy:
-      fail-fast: false
-      matrix:
-        arch: [x64, arm64]
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v4
@@ -53,33 +49,29 @@ jobs:
         run: resources\Final2x-core\Final2x-core.exe -h
 
       - name: Build desktop app
-        run: pnpm run build:win-${{ matrix.arch }}
+        run: pnpm run build:win-x64
         env:
           GH_TOKEN: ${{ github.token }}
 
       - name: Smoke-test self-contained packaged core
         shell: pwsh
         run: |
-          $directory = if ('${{ matrix.arch }}' -eq 'x64') { 'dist/win-unpacked' } else { 'dist/win-arm64-unpacked' }
           Move-Item core\dist\Final2x-core "$env:RUNNER_TEMP\Final2x-core-build"
           Move-Item resources\Final2x-core "$env:RUNNER_TEMP\Final2x-core-staged"
-          & "$directory\resources\Final2x-core\Final2x-core.exe" -h
+          & "dist\win-unpacked\resources\Final2x-core\Final2x-core.exe" -h
 
       - name: Archive unpacked app
         shell: pwsh
         run: |
-          $directory = if ('${{ matrix.arch }}' -eq 'x64') { 'dist/win-unpacked' } else { 'dist/win-arm64-unpacked' }
-          Push-Location $directory
-          7z a -mx=1 -r "Final2x-windows-${{ matrix.arch }}-unpacked.7z" *
+          Push-Location dist\win-unpacked
+          7z a -r "Final2x-windows-x64-unpacked.7z" *
           Pop-Location
 
       - name: Upload unpacked app
         uses: actions/upload-artifact@v4
         with:
-          name: Final2x-windows-${{ matrix.arch }}-unpacked
-          path: |
-            dist/win-unpacked/Final2x-windows-${{ matrix.arch }}-unpacked.7z
-            dist/win-arm64-unpacked/Final2x-windows-${{ matrix.arch }}-unpacked.7z
+          name: Final2x-windows-x64-unpacked
+          path: dist/win-unpacked/Final2x-windows-x64-unpacked.7z
 
   macos:
     runs-on: macos-14
@@ -128,7 +120,7 @@ jobs:
       - name: Archive unpacked app
         run: |
           cd dist/mac-arm64
-          7z a -mx=1 -r Final2x-macos-arm64-unpacked.7z ./*
+          7z a -r Final2x-macos-arm64-unpacked.7z ./*
 
       - name: Upload dmg
         uses: actions/upload-artifact@v4
@@ -164,7 +156,7 @@ jobs:
       - name: Archive unpacked app
         run: |
           cd dist/linux-unpacked
-          7z a -mx=1 -r Final2x-linux-pip-x64-unpacked.7z ./*
+          7z a -r Final2x-linux-pip-x64-unpacked.7z ./*
 
       - name: Upload packages
         uses: actions/upload-artifact@v4
