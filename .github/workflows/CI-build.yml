@@ -2,12 +2,10 @@ name: CI-build
 
 on:
   push:
-    branches: [main]
     paths-ignore:
       - '**.md'
       - LICENSE
   pull_request:
-    branches: [main]
     paths-ignore:
       - '**.md'
       - LICENSE
@@ -15,10 +13,6 @@ on:
 
 permissions:
   contents: read
-
-concurrency:
-  group: ci-build-${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
-  cancel-in-progress: true
 
 jobs:
   windows:
