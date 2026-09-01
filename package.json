@@ -1,7 +1,7 @@
 {
   "name": "Final2x",
   "productName": "Final2x",
-  "version": "4.0.0",
+  "version": "4.1.0-dev",
   "packageManager": "pnpm@10.17.1",
   "description": "A cross-platform image super-resolution tool.",
   "author": "Tohrusky",

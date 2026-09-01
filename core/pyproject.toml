@@ -43,7 +43,7 @@ license = "BSD-3-Clause"
 name = "Final2x_core"
 readme = "README.md"
 requires-python = ">=3.9, <4"
-version = "4.0.0"
+version = "4.1.0-dev"
 
 [project.scripts]
 Final2x-core = "Final2x_core.__main__:main"
@@ -144,13 +144,13 @@ default-groups = [
 
 [[tool.uv.index]]
 explicit = true
-name = "pytorch-cu128"
+name = "pytorch-cuda"
 url = "https://download.pytorch.org/whl/cu128"
 
 [tool.uv.sources]
 torch = [
-  {index = "pytorch-cu128", marker = "sys_platform == 'win32'"}
+  {index = "pytorch-cuda", marker = "sys_platform != 'darwin'"}
 ]
 torchvision = [
-  {index = "pytorch-cu128", marker = "sys_platform == 'win32'"}
+  {index = "pytorch-cuda", marker = "sys_platform != 'darwin'"}
 ]
