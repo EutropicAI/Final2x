@@ -1,7 +1,6 @@
 name: Release
 
 on:
-  workflow_dispatch:
   push:
     tags:
       - 'v*'
@@ -30,12 +29,7 @@ jobs:
         with:
           python-version: '3.11'
 
-      - name: Verify shared version
-        if: github.event_name == 'workflow_dispatch'
-        run: python scripts/check_version.py
-
       - name: Verify tag and shared version
-        if: github.event_name == 'push'
         run: python scripts/check_version.py --tag "${{ github.ref_name }}"
 
   windows:
@@ -192,8 +186,7 @@ jobs:
             dist/linux-unpacked/Final2x-linux-pip-x64-unpacked.7z
 
   pypi:
-    if: github.repository == 'EutropicAI/Final2x' && github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v')
-    needs: [validate, windows, macos, linux]
+    needs: [windows, macos, linux]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -208,24 +201,14 @@ jobs:
         run: uv build core
 
       - name: Publish Python distribution to PyPI
+        if: github.repository == 'EutropicAI/Final2x'
         uses: pypa/gh-action-pypi-publish@release/v1
         with:
           password: ${{ secrets.PYPI_API }}
           packages-dir: core/dist/
 
   github-release:
-    needs: [windows, macos, linux, pypi]
-    if: >-
-      always() &&
-      github.event_name == 'push' &&
-      startsWith(github.ref, 'refs/tags/v') &&
-      needs.windows.result == 'success' &&
-      needs.macos.result == 'success' &&
-      needs.linux.result == 'success' &&
-      (
-        (github.repository == 'EutropicAI/Final2x' && needs.pypi.result == 'success') ||
-        (github.repository != 'EutropicAI/Final2x' && needs.pypi.result == 'skipped')
-      )
+    needs: pypi
     runs-on: ubuntu-latest
     permissions:
       contents: write

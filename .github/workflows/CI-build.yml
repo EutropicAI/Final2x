@@ -57,6 +57,14 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
 
+      - name: Smoke-test self-contained packaged core
+        shell: pwsh
+        run: |
+          $directory = if ('${{ matrix.arch }}' -eq 'x64') { 'dist/win-unpacked' } else { 'dist/win-arm64-unpacked' }
+          Move-Item core\dist\Final2x-core "$env:RUNNER_TEMP\Final2x-core-build"
+          Move-Item resources\Final2x-core "$env:RUNNER_TEMP\Final2x-core-staged"
+          & "$directory\resources\Final2x-core\Final2x-core.exe" -h
+
       - name: Archive unpacked app
         shell: pwsh
         run: |
