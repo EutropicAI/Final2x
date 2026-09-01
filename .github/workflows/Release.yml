@@ -218,7 +218,4 @@ jobs:
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:
-          generate_release_notes: true
-          prerelease: ${{ github.repository != 'EutropicAI/Final2x' }}
-          make_latest: ${{ github.repository == 'EutropicAI/Final2x' }}
           files: dist/*
