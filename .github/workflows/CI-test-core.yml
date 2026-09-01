@@ -46,9 +46,6 @@ jobs:
       - name: Install dependencies
         run: pnpm run core:sync
 
-      - name: Check shared version
-        run: pnpm run version:check
-
       - name: Test
         run: pnpm run core:check
 

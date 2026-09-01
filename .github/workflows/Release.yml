@@ -19,19 +19,17 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-python@v5
         with:
-          node-version: 22
-
-      - uses: pnpm/action-setup@v4
+          python-version: '3.11'
 
       - name: Verify shared version
         if: github.event_name == 'workflow_dispatch'
-        run: pnpm run version:check
+        run: python scripts/check_version.py
 
       - name: Verify tag and shared version
         if: github.event_name == 'push'
-        run: pnpm run version:check -- --tag "${{ github.ref_name }}"
+        run: python scripts/check_version.py --tag "${{ github.ref_name }}"
 
   windows:
     needs: validate
