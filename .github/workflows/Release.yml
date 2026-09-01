@@ -203,8 +203,6 @@ jobs:
   github-release:
     needs: pypi
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
     steps:
       - name: Download release artifacts
         uses: actions/download-artifact@v4
