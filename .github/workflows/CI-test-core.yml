@@ -30,12 +30,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 22
-
-      - uses: pnpm/action-setup@v4
-
       - name: Install uv
         uses: astral-sh/setup-uv@08807647e7069bb48b6ef5acd8ec9567f424441b # v8.1.0
         with:
@@ -44,10 +38,15 @@ jobs:
           enable-cache: false
 
       - name: Install dependencies
-        run: pnpm run core:sync
+        run: uv sync --project core --locked
 
       - name: Test
-        run: pnpm run core:check
+        run: |
+          uv run --project core --no-sync python core/scripts/gen_config.py
+          uv run --project core --no-sync python core/scripts/gen_pretrained_model_name.py --output src/renderer/src/utils/modelOptions.ts
+          git diff --exit-code -- src/renderer/src/utils/modelOptions.ts
+          uv run --project core --no-sync pre-commit run --all-files --config core/.pre-commit-config.yaml
+          uv run --project core --no-sync pytest core/tests --cov=Final2x_core --cov-report=xml:core/coverage.xml --cov-report=html:core/htmlcov
 
       - name: Codecov
         if: matrix.os-version == 'ubuntu-latest'
@@ -66,12 +65,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 22
-
-      - uses: pnpm/action-setup@v4
-
       - name: Install uv
         uses: astral-sh/setup-uv@08807647e7069bb48b6ef5acd8ec9567f424441b # v8.1.0
         with:
@@ -80,10 +73,13 @@ jobs:
           enable-cache: false
 
       - name: Install dependencies
-        run: pnpm run core:sync:bundle
+        run: uv sync --project core --locked --no-default-groups --group dev
 
       - name: Build
-        run: pnpm run core:bundle
+        run: |
+          uv run --project core --no-sync python core/scripts/gen_config.py
+          uv run --project core --no-sync pyinstaller --noconfirm --name Final2x-core --icon core/assets/favicon.ico --distpath core/dist --workpath core/build core/Final2x_core/__main__.py
+          uv run --project core --no-sync python core/scripts/post_pyinstaller.py
 
       - name: Archive on Windows
         if: matrix.os-version == 'windows-latest'
@@ -114,12 +110,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 22
-
-      - uses: pnpm/action-setup@v4
-
       - uses: actions/download-artifact@v4
         with:
           name: Final2x-core-${{ matrix.os-version }}
@@ -132,11 +122,15 @@ jobs:
 
       - name: Test build on Windows
         if: matrix.os-version == 'windows-latest'
-        run: pnpm run core:test:bundle:windows
+        run: |
+          cd core\dist\Final2x-core
+          .\Final2x-core
 
       - name: Test build on Unix
         if: matrix.os-version != 'windows-latest'
-        run: pnpm run core:test:bundle:unix
+        run: |
+          cd core/dist/Final2x-core
+          ./Final2x-core
 
   build-wheel:
     strategy:
@@ -147,12 +141,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 22
-
-      - uses: pnpm/action-setup@v4
-
       - name: Install uv
         uses: astral-sh/setup-uv@08807647e7069bb48b6ef5acd8ec9567f424441b # v8.1.0
         with:
@@ -161,7 +149,7 @@ jobs:
           enable-cache: false
 
       - name: Build package
-        run: pnpm run core:build:wheel
+        run: uv build --wheel core
 
       - name: Upload
         uses: actions/upload-artifact@v4
@@ -180,12 +168,6 @@ jobs:
     runs-on: ${{ matrix.os-version }}
     steps:
       - uses: actions/checkout@v4
-
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 22
-
-      - uses: pnpm/action-setup@v4
 
       - uses: actions/download-artifact@v4
         with:
@@ -215,4 +197,6 @@ jobs:
           pip install core/dist/*.whl
 
       - name: Test pip
-        run: pnpm run core:test:pip
+        run: |
+          python core/scripts/gen_config.py
+          python core/scripts/CItestpip.py

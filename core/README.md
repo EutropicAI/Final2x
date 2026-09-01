@@ -1,6 +1,6 @@
 # Final2x-core
 
-Final2x-core is the cross-platform image super-resolution CLI and desktop backend for Final2x. 
+Final2x-core is the cross-platform image super-resolution CLI and desktop backend for Final2x.
 
 ### Install
 

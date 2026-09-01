@@ -46,10 +46,13 @@ jobs:
       - name: Install dependencies
         run: |
           pnpm install --frozen-lockfile
-          pnpm run core:sync:bundle
+          uv sync --project core --locked --no-default-groups --group dev
 
       - name: Build bundled core
-        run: pnpm run core:bundle
+        run: |
+          uv run --project core --no-sync python core/scripts/gen_config.py
+          uv run --project core --no-sync pyinstaller --noconfirm --name Final2x-core --icon core/assets/favicon.ico --distpath core/dist --workpath core/build core/Final2x_core/__main__.py
+          uv run --project core --no-sync python core/scripts/post_pyinstaller.py
 
       - name: Copy bundled core
         run: Copy-Item core\dist\Final2x-core resources\Final2x-core -Recurse
@@ -99,10 +102,13 @@ jobs:
       - name: Install dependencies
         run: |
           pnpm install --frozen-lockfile
-          pnpm run core:sync:bundle
+          uv sync --project core --locked --no-default-groups --group dev
 
       - name: Build bundled core
-        run: pnpm run core:bundle
+        run: |
+          uv run --project core --no-sync python core/scripts/gen_config.py
+          uv run --project core --no-sync pyinstaller --noconfirm --name Final2x-core --icon core/assets/favicon.ico --distpath core/dist --workpath core/build core/Final2x_core/__main__.py
+          uv run --project core --no-sync python core/scripts/post_pyinstaller.py
 
       - name: Copy bundled core
         run: cp -R core/dist/Final2x-core resources/
