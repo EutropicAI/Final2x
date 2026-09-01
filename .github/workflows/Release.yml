@@ -213,7 +213,7 @@ jobs:
           enable-cache: false
 
       - name: Build Python distribution
-        run: make -C core build
+        run: uv build core
 
       - name: Publish Python distribution to PyPI
         uses: pypa/gh-action-pypi-publish@release/v1

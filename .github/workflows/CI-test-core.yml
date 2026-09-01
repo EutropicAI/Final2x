@@ -148,7 +148,7 @@ jobs:
           enable-cache: false
 
       - name: Build package
-        run: make -C core build
+        run: uv build core
 
       - name: Upload
         uses: actions/upload-artifact@v4

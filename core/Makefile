@@ -11,9 +11,6 @@ gen:
 gen-ts:
 	uv run --no-sync python scripts/gen_pretrained_model_name.py --output ../src/renderer/src/utils/modelOptions.ts
 
-build:
-	uv build
-
 pyinstaller:
 	uv run --no-sync pyinstaller --noconfirm --name Final2x-core --icon assets/favicon.ico --distpath dist --workpath build Final2x_core/__main__.py
 	uv run --no-sync python scripts/post_pyinstaller.py
