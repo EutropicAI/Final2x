@@ -31,9 +31,8 @@ jobs:
       - uses: pnpm/action-setup@v4
 
       - name: Install uv
-        uses: astral-sh/setup-uv@08807647e7069bb48b6ef5acd8ec9567f424441b # v8.1.0
+        uses: astral-sh/setup-uv@v10
         with:
-          version: 0.11.28
           python-version: '3.11'
           enable-cache: false
 
@@ -86,9 +85,8 @@ jobs:
       - uses: pnpm/action-setup@v4
 
       - name: Install uv
-        uses: astral-sh/setup-uv@08807647e7069bb48b6ef5acd8ec9567f424441b # v8.1.0
+        uses: astral-sh/setup-uv@v10
         with:
-          version: 0.11.28
           python-version: '3.11'
           enable-cache: false
 

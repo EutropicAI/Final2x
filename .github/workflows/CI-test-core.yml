@@ -22,17 +22,15 @@ jobs:
     strategy:
       matrix:
         os-version: [windows-latest, ubuntu-latest, macos-14]
-        python-version: ['3.11']
 
     runs-on: ${{ matrix.os-version }}
     steps:
       - uses: actions/checkout@v4
 
       - name: Install uv
-        uses: astral-sh/setup-uv@08807647e7069bb48b6ef5acd8ec9567f424441b # v8.1.0
+        uses: astral-sh/setup-uv@v10
         with:
-          version: 0.11.28
-          python-version: ${{ matrix.python-version }}
+          python-version: '3.11'
           enable-cache: false
 
       - name: Install dependencies
@@ -57,17 +55,15 @@ jobs:
     strategy:
       matrix:
         os-version: [windows-latest, ubuntu-latest, macos-14]
-        python-version: ['3.11']
 
     runs-on: ${{ matrix.os-version }}
     steps:
       - uses: actions/checkout@v4
 
       - name: Install uv
-        uses: astral-sh/setup-uv@08807647e7069bb48b6ef5acd8ec9567f424441b # v8.1.0
+        uses: astral-sh/setup-uv@v10
         with:
-          version: 0.11.28
-          python-version: ${{ matrix.python-version }}
+          python-version: '3.11'
           enable-cache: false
 
       - name: Install dependencies
@@ -130,19 +126,14 @@ jobs:
           ./Final2x-core
 
   build-wheel:
-    strategy:
-      matrix:
-        python-version: ['3.11']
-
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
 
       - name: Install uv
-        uses: astral-sh/setup-uv@08807647e7069bb48b6ef5acd8ec9567f424441b # v8.1.0
+        uses: astral-sh/setup-uv@v10
         with:
-          version: 0.11.28
-          python-version: ${{ matrix.python-version }}
+          python-version: '3.11'
           enable-cache: false
 
       - name: Build package
