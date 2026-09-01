@@ -42,11 +42,11 @@ jobs:
 
       - name: Test
         run: |
-          uv run --project core --no-sync python core/scripts/gen_config.py
-          uv run --project core --no-sync python core/scripts/gen_pretrained_model_name.py --output src/renderer/src/utils/modelOptions.ts
+          make -C core gen
+          make -C core gen-ts
           git diff --exit-code -- src/renderer/src/utils/modelOptions.ts
-          uv run --project core --no-sync pre-commit run --all-files --config core/.pre-commit-config.yaml
-          uv run --project core --no-sync pytest core/tests --cov=Final2x_core --cov-report=xml:core/coverage.xml --cov-report=html:core/htmlcov
+          make -C core lint
+          make -C core test
 
       - name: Codecov
         if: matrix.os-version == 'ubuntu-latest'
@@ -77,9 +77,8 @@ jobs:
 
       - name: Build
         run: |
-          uv run --project core --no-sync python core/scripts/gen_config.py
-          uv run --project core --no-sync pyinstaller --noconfirm --name Final2x-core --icon core/assets/favicon.ico --distpath core/dist --workpath core/build core/Final2x_core/__main__.py
-          uv run --project core --no-sync python core/scripts/post_pyinstaller.py
+          make -C core gen
+          make -C core pyinstaller
 
       - name: Archive on Windows
         if: matrix.os-version == 'windows-latest'
@@ -149,7 +148,7 @@ jobs:
           enable-cache: false
 
       - name: Build package
-        run: uv build --wheel core
+        run: make -C core build
 
       - name: Upload
         uses: actions/upload-artifact@v4
