@@ -22,21 +22,30 @@ export async function runCommand(event: IpcMainEvent, coreConfig: Final2xCoreCon
 
   console.log(resourceUrl, args)
 
-  child = spawn(resourceUrl, args)
+  const runningChild = spawn(resourceUrl, args)
+  child = runningChild
 
-  child.stdout.on('data', (data) => {
+  runningChild.stdout.on('data', (data) => {
     event.sender.send(IpcChannelOn.COMMAND_STDOUT, data.toString())
   })
 
-  child.stderr.on('data', (data) => {
+  runningChild.stderr.on('data', (data) => {
     event.sender.send(IpcChannelOn.COMMAND_STDERR, data.toString())
   })
 
-  const [code] = await once(child, 'close')
-  event.sender.send(IpcChannelOn.COMMAND_CLOSE, code)
-  console.log(`Child process exited with code: ${code}`)
-
-  child = null
+  try {
+    const [code] = await once(runningChild, 'close')
+    event.sender.send(IpcChannelOn.COMMAND_CLOSE, code)
+    console.log(`Child process exited with code: ${code}`)
+  }
+  catch (error) {
+    event.sender.send(IpcChannelOn.COMMAND_STDERR, `${error}\n`)
+    event.sender.send(IpcChannelOn.COMMAND_CLOSE, 1)
+  }
+  finally {
+    if (child === runningChild)
+      child = null
+  }
 }
 
 export async function killCommand(): Promise<void> {
