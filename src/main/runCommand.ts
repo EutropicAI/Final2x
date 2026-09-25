@@ -5,7 +5,7 @@ import { spawn } from 'node:child_process'
 import { once } from 'node:events'
 import { IpcChannelOn } from '@shared/const/ipc'
 import kill from 'tree-kill'
-import { getCorePath } from './getCorePath'
+import { getCoreArgs, getCorePath } from './getCorePath'
 
 let child: ChildProcessWithoutNullStreams | null = null
 
@@ -15,16 +15,14 @@ export async function runCommand(event: IpcMainEvent, coreConfig: Final2xCoreCon
   config_json = Buffer.from(config_json, 'utf8').toString('base64')
 
   const resourceUrl = getCorePath()
+  const args = [...getCoreArgs(), '-b', config_json]
 
-  let command = `"${resourceUrl}" -b ${config_json}`
+  if (!coreConfig.options.open_output_folder)
+    args.push('-n')
 
-  if (!coreConfig.options.open_output_folder) {
-    command += ' -n'
-  }
+  console.log(resourceUrl, args)
 
-  console.log(command)
-
-  child = spawn(command, { shell: true })
+  child = spawn(resourceUrl, args)
 
   child.stdout.on('data', (data) => {
     event.sender.send(IpcChannelOn.COMMAND_STDOUT, data.toString())
