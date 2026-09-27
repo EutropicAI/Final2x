@@ -25,5 +25,7 @@ export const ja = {
     text18: 'プロキシ',
     text19: 'Format',
     text20: 'Tile Process',
+    text21: '精度',
+    text22: 'FP16 はメモリ使用量を抑えますが、一部のモデルやデバイスでは動作しない場合があります。',
   },
 }

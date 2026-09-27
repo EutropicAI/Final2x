@@ -25,5 +25,7 @@ export const fr = {
     text18: 'Proxy',
     text19: 'Format',
     text20: 'Tile Process',
+    text21: 'Précision',
+    text22: 'FP16 réduit l’utilisation de la mémoire vidéo, mais peut ne pas fonctionner avec tous les modèles ou appareils.',
   },
 }

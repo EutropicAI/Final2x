@@ -25,5 +25,7 @@ export const en = {
     text18: 'Proxy',
     text19: 'Format',
     text20: 'Tile Process',
+    text21: 'Precision',
+    text22: 'FP16 uses less VRAM but may not work with every model or device.',
   },
 }

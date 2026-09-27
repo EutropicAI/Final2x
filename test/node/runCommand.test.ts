@@ -22,6 +22,7 @@ describe('runCommand', () => {
         output_path: '.',
         input_path: [],
         use_tile: false,
+        precision: 'fp32',
         save_format: '.png',
       },
       options: { open_output_folder: false },

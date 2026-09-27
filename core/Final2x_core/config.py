@@ -1,7 +1,7 @@
 import base64
 import json
 from pathlib import Path
-from typing import Any, List, Optional, Union
+from typing import Any, List, Literal, Optional, Union
 
 import yaml
 from cccv import ConfigType
@@ -12,6 +12,7 @@ class SRConfig(BaseModel):
     pretrained_model_name: Union[ConfigType, str]
     device: str
     use_tile: Optional[bool] = None
+    precision: Literal["fp32", "fp16"] = "fp32"
     gh_proxy: Optional[str] = None
     target_scale: Optional[Union[int, float]] = None
     output_path: DirectoryPath
