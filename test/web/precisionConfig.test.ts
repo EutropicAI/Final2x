@@ -19,4 +19,9 @@ describe('precision configuration', () => {
     useSRSettingsStore().precision = 'fp16'
     expect(getFinal2xCoreConfig().config.precision).toBe('fp16')
   })
+
+  it('sends the selected BF16 mode to the core', () => {
+    useSRSettingsStore().precision = 'bf16'
+    expect(getFinal2xCoreConfig().config.precision).toBe('bf16')
+  })
 })

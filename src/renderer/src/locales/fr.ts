@@ -26,6 +26,6 @@ export const fr = {
     text19: 'Format',
     text20: 'Tile Process',
     text21: 'Précision',
-    text22: 'FP16 réduit l’utilisation de la mémoire vidéo, mais peut ne pas fonctionner avec tous les modèles ou appareils.',
+    text22: 'FP16 économise la mémoire vidéo mais peut déborder sur certains modèles. BF16 offre une plage numérique plus large sur les appareils compatibles et peut revenir à FP32.',
   },
 }

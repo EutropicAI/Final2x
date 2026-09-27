@@ -27,6 +27,7 @@ class SRWrapper:
             self.config.pretrained_model_name,
             device=get_device(self.config.device),
             fp16=self.config.precision == "fp16",
+            bf16=self.config.precision == "bf16",
             tile=tile,
             gh_proxy=self.config.gh_proxy,
         )

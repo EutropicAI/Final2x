@@ -12,7 +12,7 @@ class SRConfig(BaseModel):
     pretrained_model_name: Union[ConfigType, str]
     device: str
     use_tile: Optional[bool] = None
-    precision: Literal["fp32", "fp16"] = "fp32"
+    precision: Literal["fp32", "fp16", "bf16"] = "fp32"
     gh_proxy: Optional[str] = None
     target_scale: Optional[Union[int, float]] = None
     output_path: DirectoryPath

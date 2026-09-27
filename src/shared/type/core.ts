@@ -1,4 +1,4 @@
-export type Precision = 'fp32' | 'fp16'
+export type Precision = 'fp32' | 'fp16' | 'bf16'
 
 export interface Final2xCoreConfig {
   config: {
