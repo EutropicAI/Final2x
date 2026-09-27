@@ -24,7 +24,7 @@ typing = [
 ]
 
 [project]
-authors = [{name = "Tohrusky"}]
+authors = [{ name = "Tohrusky" }]
 classifiers = [
   "Programming Language :: Python :: 3.9",
   "Programming Language :: Python :: 3.10",
@@ -149,8 +149,8 @@ url = "https://download.pytorch.org/whl/cu128"
 
 [tool.uv.sources]
 torch = [
-  {index = "pytorch-cuda", marker = "sys_platform != 'darwin'"}
+  { index = "pytorch-cuda", marker = "sys_platform != 'darwin'" }
 ]
 torchvision = [
-  {index = "pytorch-cuda", marker = "sys_platform != 'darwin'"}
+  { index = "pytorch-cuda", marker = "sys_platform != 'darwin'" }
 ]

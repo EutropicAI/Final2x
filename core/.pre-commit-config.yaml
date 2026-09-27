@@ -20,6 +20,7 @@ repos:
     rev: v2.15.0
     hooks:
       - id: pretty-format-toml
+        language_version: python
         args: [--autofix]
         exclude: ^core/uv\.lock$
 
