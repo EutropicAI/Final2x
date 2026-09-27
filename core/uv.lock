@@ -147,6 +147,15 @@ wheels = [
 ]
 
 [[package]]
+name = "certifi"
+version = "2026.7.22"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/a3/c2/24167ea9858356b47a87a50d39908bfdb72ceeefe0041586e704e5376b3a/certifi-2026.7.22.tar.gz", hash = "sha256:741e2c3b351ddf169a738da9f2c048608ff7f2c5cc02f1ebc6b118bb090d5d55", size = 138112, upload-time = "2026-07-22T03:35:12.644Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/0b/a7/71ac2cff56fec219ed242bb11b8efb69fcc4bec75db06fb7bfe35de520e6/certifi-2026.7.22-py3-none-any.whl", hash = "sha256:62f22742b58a1a33014a2b6b706588a8d7e2a88ae7bd1a6ebe8c992928483775", size = 136983, upload-time = "2026-07-22T03:35:11.276Z" },
+]
+
+[[package]]
 name = "cfgv"
 version = "3.4.0"
 source = { registry = "https://pypi.org/simple" }
@@ -536,6 +545,7 @@ version = "4.1.0.dev0"
 source = { editable = "." }
 dependencies = [
     { name = "cccv" },
+    { name = "certifi" },
     { name = "loguru" },
     { name = "pydantic" },
     { name = "pyyaml" },
@@ -575,6 +585,7 @@ typing = [
 [package.metadata]
 requires-dist = [
     { name = "cccv", specifier = "==0.0.4" },
+    { name = "certifi" },
     { name = "loguru" },
     { name = "pydantic" },
     { name = "pyyaml" },
