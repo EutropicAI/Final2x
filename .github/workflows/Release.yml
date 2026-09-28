@@ -208,7 +208,10 @@ jobs:
       - name: Build Python distribution
         run: uv build core
 
+      # Fork repositories must skip PyPI publishing so they can still build
+      # and create their own GitHub Release; only upstream is a trusted publisher.
       - name: Publish Python distribution to PyPI
+        if: github.repository == 'EutropicAI/Final2x'
         uses: pypa/gh-action-pypi-publish@release/v1
         with:
           packages-dir: core/dist/
