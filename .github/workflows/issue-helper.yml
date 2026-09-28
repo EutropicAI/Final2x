@@ -1,8 +1,9 @@
 name: issue-helper
 
 on:
-  issues:
-    types: [opened, reopened, edited]
+  schedule:
+    - cron: '0 0 * * 1'
+  workflow_dispatch:
 
 permissions:
   issues: write
@@ -11,30 +12,16 @@ jobs:
   check-inactive:
     runs-on: ubuntu-latest
     steps:
-      - name: close-issues
-        uses: actions/github-script@v8
-        env:
-          INACTIVE_BODY: |
+      - uses: actions/stale@v11
+        with:
+          days-before-issue-stale: 100
+          days-before-issue-close: 0
+          days-before-pr-stale: -1
+          days-before-pr-close: -1
+          stale-issue-message: ''
+          close-issue-message: |
             Hello! your issue has been closed because it has been inactive for a long time.
 
             你好，你的 issue 因为长时间不活跃而被自动关闭。
 
             こんにちは、お問い合わせは長期間活動がないため、閉じられました。
-        with:
-          script: |
-            const cutoff = Date.now() - 100 * 24 * 60 * 60 * 1000;
-            const issues = await github.paginate(github.rest.issues.listForRepo, {
-              ...context.repo,
-              state: 'open',
-              sort: 'updated',
-              direction: 'asc',
-              per_page: 100
-            });
-            for (const issue of issues) {
-              if (issue.pull_request || Date.parse(issue.updated_at) >= cutoff) continue;
-              const params = { ...context.repo, issue_number: issue.number };
-              const { data: current } = await github.rest.issues.get(params);
-              if (current.state !== 'open' || Date.parse(current.updated_at) >= cutoff) continue;
-              await github.rest.issues.createComment({ ...params, body: process.env.INACTIVE_BODY });
-              await github.rest.issues.update({ ...params, state: 'closed' });
-            }
