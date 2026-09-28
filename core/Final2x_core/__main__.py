@@ -7,6 +7,7 @@ from loguru import logger
 
 from Final2x_core.config import SRConfig
 from Final2x_core.SRqueue import sr_queue
+from Final2x_core.util.certificates import configure_ssl_certificates
 
 if getattr(sys, "frozen", False):
     # frozen
@@ -44,6 +45,8 @@ def open_folder(path: str) -> None:
 
 
 def main() -> None:
+    configure_ssl_certificates()
+
     if args.LOG:
         # init logger
         logger.add(projectPATH / "logs" / "log-{time}.log", encoding="utf-8", retention="60 days")

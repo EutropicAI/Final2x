@@ -35,6 +35,7 @@ classifiers = [
 dependencies = [
   "PyYAML",
   "cccv @ git+https://github.com/EutropicAI/cccv.git@f95ab864d7130b1f47895d374ed67812b1a1bdbf",
+  "certifi",
   "loguru",
   "pydantic"
 ]
