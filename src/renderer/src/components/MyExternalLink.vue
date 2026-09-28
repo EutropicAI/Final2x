@@ -5,17 +5,13 @@ class openWebsite {
   static async FinalRip(): Promise<void> {
     window.open('https://github.com/EutropicAI/FinalRip', '_blank')
   }
-
-  static async VSET(): Promise<void> {
-    window.open('https://github.com/EutropicAI/VSET', '_blank')
-  }
 }
 </script>
 
 <template>
   <div class="MyExternalLink">
     <n-space>
-      <n-button style="font-size: 36px" text @click="openWebsite.VSET">
+      <n-button style="font-size: 36px" text @click="openWebsite.FinalRip">
         <n-icon>
           <FilmOutline />
         </n-icon>
