@@ -1,6 +1,7 @@
-<a href="https://trendshift.io/repositories/19699"><img align="right" src="https://trendshift.io/api/badge/repositories/19699" alt="Final2x on Trendshift" width="250" height="55" /></a>
-
-# Final2x
+<h1>
+  <a href="https://trendshift.io/repositories/19699"><img align="right" src="https://trendshift.io/api/badge/repositories/19699" alt="Final2x on Trendshift" width="200" height="44" /></a>
+  Final2x
+</h1>
 
 ![MacOS](https://img.shields.io/badge/Support-MacOS-blue?logo=Apple&style=flat-square)
 ![Windows](https://img.shields.io/badge/Support-Windows-blue?logo=Windows&style=flat-square)
