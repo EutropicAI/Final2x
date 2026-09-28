@@ -158,12 +158,26 @@ jobs:
           cd dist/linux-unpacked
           7z a -r Final2x-linux-pip-x64-unpacked.7z ./*
 
-      - name: Upload packages
+      - name: Upload snap
         uses: actions/upload-artifact@v4
         with:
-          name: Final2x-linux-pip-x64
-          path: |
-            dist/*.snap
-            dist/*.AppImage
-            dist/*.deb
-            dist/linux-unpacked/Final2x-linux-pip-x64-unpacked.7z
+          name: Final2x-linux-pip-x64-snap
+          path: dist/*.snap
+
+      - name: Upload AppImage
+        uses: actions/upload-artifact@v4
+        with:
+          name: Final2x-linux-pip-x64-AppImage
+          path: dist/*.AppImage
+
+      - name: Upload deb
+        uses: actions/upload-artifact@v4
+        with:
+          name: Final2x-linux-pip-x64-deb
+          path: dist/*.deb
+
+      - name: Upload unpacked app
+        uses: actions/upload-artifact@v4
+        with:
+          name: Final2x-linux-pip-x64-unpacked
+          path: dist/linux-unpacked/Final2x-linux-pip-x64-unpacked.7z
