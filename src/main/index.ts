@@ -1,11 +1,10 @@
 import { join } from 'node:path'
 import { electronApp, is, optimizer } from '@electron-toolkit/utils'
-import { IpcChannelInvoke, IpcChannelSend } from '@shared/const/ipc'
-import { app, BrowserWindow, ipcMain, Menu, nativeImage, shell, Tray } from 'electron'
+import { app, BrowserWindow, Menu, nativeImage, shell, Tray } from 'electron'
 import appIcon from '../../resources/icon.png?asset'
 import trayIcon from '../../resources/tray.png?asset'
-import { openDirectory } from './openDirectory'
-import { killCommand, runCommand } from './runCommand'
+import { registerIpcHandlers } from './registerIpcHandlers'
+import { killCommand } from './runCommand'
 
 function createWindow(): void {
   // Create the browser window.
@@ -29,35 +28,6 @@ function createWindow(): void {
   if (process.platform === 'darwin') {
     app.dock.setIcon(nativeImage.createFromPath(appIcon))
   }
-
-  // Ipc events
-  ipcMain.on(IpcChannelSend.EXECUTE_COMMAND, runCommand)
-
-  ipcMain.on(IpcChannelSend.KILL_COMMAND, killCommand)
-
-  ipcMain.handle(IpcChannelInvoke.OPEN_DIRECTORY_DIALOG, openDirectory)
-
-  ipcMain.on(IpcChannelSend.MINIMIZE, () => {
-    mainWindow.minimize()
-  })
-
-  ipcMain.on(IpcChannelSend.MAXIMIZE, () => {
-    if (mainWindow.isMaximized()) {
-      mainWindow.restore()
-    }
-    else {
-      mainWindow.maximize()
-    }
-  })
-
-  ipcMain.on(IpcChannelSend.CLOSE, () => {
-    if (process.platform !== 'darwin') {
-      app.quit()
-    }
-    else {
-      app.hide()
-    }
-  })
 
   // mainWindow
   mainWindow.on('ready-to-show', () => {
@@ -129,6 +99,7 @@ app.whenReady().then(() => {
     optimizer.watchWindowShortcuts(window)
   })
 
+  registerIpcHandlers()
   setTray()
   createWindow()
 

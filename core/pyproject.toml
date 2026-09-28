@@ -35,6 +35,7 @@ classifiers = [
 dependencies = [
   "PyYAML",
   "cccv==0.0.4",
+  "certifi",
   "loguru",
   "pydantic"
 ]
