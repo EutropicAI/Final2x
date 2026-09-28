@@ -7,6 +7,7 @@ on:
 
 permissions:
   contents: write
+  id-token: write
 
 jobs:
   validate:
@@ -168,15 +169,29 @@ jobs:
           cd dist/linux-unpacked
           7z a -r Final2x-linux-pip-x64-unpacked.7z ./*
 
-      - name: Upload packages
+      - name: Upload snap
         uses: actions/upload-artifact@v4
         with:
-          name: Final2x-linux-pip-x64
-          path: |
-            dist/Final2x-linux-pip-x64-snap.snap
-            dist/Final2x-linux-pip-x64-AppImage.AppImage
-            dist/Final2x-linux-pip-x64-deb.deb
-            dist/linux-unpacked/Final2x-linux-pip-x64-unpacked.7z
+          name: Final2x-linux-pip-x64-snap
+          path: dist/Final2x-linux-pip-x64-snap.snap
+
+      - name: Upload AppImage
+        uses: actions/upload-artifact@v4
+        with:
+          name: Final2x-linux-pip-x64-AppImage
+          path: dist/Final2x-linux-pip-x64-AppImage.AppImage
+
+      - name: Upload deb
+        uses: actions/upload-artifact@v4
+        with:
+          name: Final2x-linux-pip-x64-deb
+          path: dist/Final2x-linux-pip-x64-deb.deb
+
+      - name: Upload unpacked app
+        uses: actions/upload-artifact@v4
+        with:
+          name: Final2x-linux-pip-x64-unpacked
+          path: dist/linux-unpacked/Final2x-linux-pip-x64-unpacked.7z
 
   pypi:
     needs: [windows, macos, linux]
@@ -194,10 +209,8 @@ jobs:
         run: uv build core
 
       - name: Publish Python distribution to PyPI
-        if: github.repository == 'EutropicAI/Final2x'
         uses: pypa/gh-action-pypi-publish@release/v1
         with:
-          password: ${{ secrets.PYPI_API }}
           packages-dir: core/dist/
 
   github-release:
