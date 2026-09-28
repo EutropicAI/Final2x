@@ -1,8 +1,6 @@
-# Final2x
+<a href="https://trendshift.io/repositories/19699"><img align="right" src="https://trendshift.io/api/badge/repositories/19699" alt="Final2x on Trendshift" width="250" height="55" /></a>
 
-<div align="center">
-<a href="https://trendshift.io/repositories/19699" target="_blank"><img src="https://trendshift.io/api/badge/repositories/19699" alt="EutropicAI%2FFinal2x | Trendshift" style="width: 250px; height: 55px;" width="250" height="55"/></a>
-</div>
+# Final2x
 
 ![MacOS](https://img.shields.io/badge/Support-MacOS-blue?logo=Apple&style=flat-square)
 ![Windows](https://img.shields.io/badge/Support-Windows-blue?logo=Windows&style=flat-square)
