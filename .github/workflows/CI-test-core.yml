@@ -45,12 +45,28 @@ jobs:
           make -C core lint
           make -C core test
 
-      - name: Codecov
+      - name: Save coverage report
         if: matrix.os-version == 'ubuntu-latest'
-        uses: codecov/codecov-action@v5
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage
+          path: core/coverage.xml
+          if-no-files-found: error
+
+  coverage:
+    needs: pytest
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/download-artifact@v4
+        with:
+          name: coverage
+      - uses: codecov/codecov-action@v5
         with:
           use_oidc: ${{ github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository }}
-          files: core/coverage.xml
+          files: coverage.xml
 
   build:
     strategy:
