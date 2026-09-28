@@ -14,62 +14,58 @@
 ![Download](https://img.shields.io/github/downloads/EutropicAI/Final2x/total)
 ![GitHub](https://img.shields.io/github/license/EutropicAI/Final2x)
 
-A cross-platform image super-resolution tool.
+A cross-platform image super-resolution tool for Windows, macOS, and Linux.
 
-- News🎉: Final2x v4.0.0 is now available! It uses the [cccv](https://github.com/EutropicAI/cccv) backend, supporting custom models and more. See [custom model demo](https://github.com/EutropicAI/cccv_demo_remote_model).
-- News🎉: Final2x v3.0.0 is now available, support Nvidia 50 series GPUs now!
+Use built-in models or load your own. See the [custom model demo](https://github.com/EutropicAI/cccv_demo_remote_model) to get started.
 
-### Screenshots
+## 🖼️ Screenshots
 
 <div align=center>
 <img width="40%" alt="image" src="https://github.com/user-attachments/assets/37f6d444-766b-4c28-b64a-018f78ae1f35" />
 <img width="40%" alt="image" src="https://github.com/user-attachments/assets/c6a278c0-bf11-46a7-9dcc-e5fe97ccc71c" />
 </div>
 
-### Installation
+## 📦 Installation
 
-##### [Download the latest release from here.](https://github.com/EutropicAI/Final2x/releases)
+[Download the latest release](https://github.com/EutropicAI/Final2x/releases) for your platform.
 
-#### Windows
+### 🪟 Windows
 
-You can also use a package manager like winget or scoop to install and upgrade. Please note that the versions available through package managers may not always be the latest.
+Install from the release page, or use a package manager such as winget or Scoop. Package manager versions may lag behind the latest release.
 
-#### MacOS
+### 🍎 macOS
+
+If macOS blocks the app on first launch, run the following command in Terminal after placing it in `/Applications`:
 
 ```bash
-sudo spctl --master-disable
-# Disable Gatekeeper, then allow applications downloaded from anywhere in System Preferences > Security & Privacy > General
 xattr -cr /Applications/Final2x.app
 ```
 
-In first time, you need to run the command above in terminal to allow the app to run.
+### 🐧 Linux
 
-#### Linux
-
-For Linux User, you need to install the dependencies first.
-
-Make sure you have Python >= 3.9 and PyTorch >= 2.0 installed
+Install Python >= 3.9 and PyTorch >= 2.0, then install the backend and required system libraries. On Debian or Ubuntu:
 
 ```bash
 pip install Final2x-core
-Final2x-core -h # check if the installation is successful
-apt install -y libomp5 xdg-utils
+Final2x-core -h # Verify the backend installation
+sudo apt install -y libomp5 xdg-utils
 ```
 
-### Reference
+## 🧩 References
 
-The Python CLI and desktop backend now live in [`core`](./core) and are released with the desktop app under the same version number.
+The Python CLI and desktop backend live in [`core`](./core) and share the desktop app's version number.
 
-The following references were referenced in the development of this project:
+This project builds on the following open-source projects:
 
+- [cccv](https://github.com/EutropicAI/cccv) — image restoration and super-resolution backend
 - [naive-ui](https://github.com/tusen-ai/naive-ui)
 - [electron-vite](https://github.com/alex8088/electron-vite)
 
-### License
+## 📄 License
 
 This project is licensed under the BSD 3-Clause - see
 the [LICENSE file](./LICENSE) for details.
 
-### Acknowledgements
+## 💙 Acknowledgements
 
 Feel free to reach out to the project maintainers with any questions or concerns~
