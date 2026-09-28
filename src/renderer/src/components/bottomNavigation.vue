@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import MyExternalLink from './MyExternalLink.vue'
 import MySetting from './MySetting.vue'
 </script>
 
@@ -7,6 +8,7 @@ import MySetting from './MySetting.vue'
     <n-divider class="n-divider" />
     <n-space class="n-space" justify="space-between">
       <MySetting />
+      <MyExternalLink />
     </n-space>
   </div>
 </template>
