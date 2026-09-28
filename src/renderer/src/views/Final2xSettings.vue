@@ -7,11 +7,11 @@ import { useIOPathStore } from '../store/ioPathStore'
 import { useSRSettingsStore } from '../store/SRSettingsStore'
 import IOPath from '../utils/IOPath'
 import { modelOptions } from '../utils/modelOptions'
-import { saveFormatList, torchDeviceList } from '../utils/SROptions'
+import { precisionList, saveFormatList, torchDeviceList } from '../utils/SROptions'
 
 const { openOutputFolder }
   = storeToRefs(useGlobalSettingsStore())
-const { selectedSRModel, ghProxy, targetScale, selectedTorchDevice, useTile, saveFormat } = storeToRefs(useSRSettingsStore())
+const { selectedSRModel, ghProxy, targetScale, selectedTorchDevice, useTile, precision, saveFormat } = storeToRefs(useSRSettingsStore())
 const { outputpath } = storeToRefs(useIOPathStore())
 const { t } = useI18n()
 
@@ -98,6 +98,23 @@ function getPath(): void {
             OFF
           </template>
         </n-switch>
+      </n-space>
+
+      <n-space>
+        <n-popover trigger="hover" placement="top" style="max-width: 320px">
+          <template #trigger>
+            <n-button dashed type="success" style="width: 80px">
+              {{ t('Final2xSettings.text21') }}
+            </n-button>
+          </template>
+          {{ t('Final2xSettings.text22') }}
+        </n-popover>
+
+        <n-select
+          v-model:value="precision"
+          :options="precisionList"
+          style="width: 150px"
+        />
       </n-space>
 
       <n-space>

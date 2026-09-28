@@ -15,3 +15,9 @@ export const saveFormatList: Ref<any[]> = ref([
   { value: '.webp', label: 'WebP' },
   { value: '.tiff', label: 'TIFF' },
 ])
+
+export const precisionList: Ref<any[]> = ref([
+  { value: 'fp32', label: 'FP32' },
+  { value: 'fp16', label: 'FP16' },
+  { value: 'bf16', label: 'BF16' },
+])

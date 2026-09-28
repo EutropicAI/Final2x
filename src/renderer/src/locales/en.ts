@@ -25,5 +25,7 @@ export const en = {
     text18: 'Proxy',
     text19: 'Format',
     text20: 'Tile Process',
+    text21: 'Precision',
+    text22: 'FP16 saves VRAM but may overflow on some models. BF16 has a wider numeric range on supported devices; it may fall back to FP32.',
   },
 }

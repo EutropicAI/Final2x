@@ -134,16 +134,13 @@ wheels = [
 [[package]]
 name = "cccv"
 version = "0.0.4"
-source = { registry = "https://pypi.org/simple" }
+source = { git = "https://github.com/EutropicAI/cccv.git?rev=f95ab864d7130b1f47895d374ed67812b1a1bdbf#f95ab864d7130b1f47895d374ed67812b1a1bdbf" }
 dependencies = [
     { name = "einops" },
     { name = "opencv-python" },
     { name = "pydantic" },
     { name = "tenacity", version = "9.1.2", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.10'" },
     { name = "tenacity", version = "9.1.4", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.10'" },
-]
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/be/b3/36984e26080fd4f37566ada0e83832856a3cc80bce436f35cb5675c65dee/cccv-0.0.4-py3-none-any.whl", hash = "sha256:acbf7ef4f5a9ff9e38150a53638898864e1b3189e69da2d6f2a375a8f39eddfe", size = 107704, upload-time = "2025-09-27T00:18:45.054Z" },
 ]
 
 [[package]]
@@ -584,7 +581,7 @@ typing = [
 
 [package.metadata]
 requires-dist = [
-    { name = "cccv", specifier = "==0.0.4" },
+    { name = "cccv", git = "https://github.com/EutropicAI/cccv.git?rev=f95ab864d7130b1f47895d374ed67812b1a1bdbf" },
     { name = "certifi" },
     { name = "loguru" },
     { name = "pydantic" },

@@ -25,5 +25,7 @@ export const fr = {
     text18: 'Proxy',
     text19: 'Format',
     text20: 'Tile Process',
+    text21: 'Précision',
+    text22: 'FP16 économise la mémoire vidéo mais peut déborder sur certains modèles. BF16 offre une plage numérique plus large sur les appareils compatibles et peut revenir à FP32.',
   },
 }

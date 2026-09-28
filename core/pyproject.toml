@@ -34,7 +34,7 @@ classifiers = [
 ]
 dependencies = [
   "PyYAML",
-  "cccv==0.0.4",
+  "cccv @ git+https://github.com/EutropicAI/cccv.git@f95ab864d7130b1f47895d374ed67812b1a1bdbf",
   "certifi",
   "loguru",
   "pydantic"
@@ -70,6 +70,9 @@ omit = [
 
 [tool.hatch.build.sources]
 "Final2x_core" = "Final2x_core"
+
+[tool.hatch.metadata]
+allow-direct-references = true
 
 [tool.hatch.build.targets.sdist]
 include = ["Final2x_core"]

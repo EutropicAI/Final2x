@@ -22,6 +22,7 @@ def gen_config() -> None:
         "pretrained_model_name": ConfigType.RealESRGAN_AnimeJaNai_HD_V3_Compact_2x.value,
         "device": _DEVICE_,
         "use_tile": True,
+        "precision": "fp32",
         "gh_proxy": None,
         "target_scale": None,
         "output_path": str(projectPATH / "assets"),
