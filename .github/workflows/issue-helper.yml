@@ -4,6 +4,9 @@ on:
   issues:
     types: [opened, reopened, edited]
 
+permissions:
+  issues: write
+
 jobs:
   check-inactive:
     runs-on: ubuntu-latest
@@ -12,7 +15,7 @@ jobs:
         uses: actions-cool/issues-helper@v2
         with:
           actions: 'close-issues'
-          token: ${{ secrets.GH_TOKEN }}
+          token: ${{ github.token }}
           inactive-day: 100
           body: |
             Hello! your issue has been closed because it has been inactive for a long time.
@@ -29,7 +32,7 @@ jobs:
         uses: actions-cool/issues-helper@v3
         with:
           actions: 'create-comment, add-labels, close-issue'
-          token: ${{ secrets.GH_TOKEN }}
+          token: ${{ github.token }}
           issue-number: ${{ github.event.issue.number }}
           labels: 'Invalid'
           body: |
