@@ -40,7 +40,6 @@ repos:
         pass_filenames: false
         additional_dependencies:
           - types-requests
-          - types-certifi
           - types-PyYAML
           - pytest
           - pydantic

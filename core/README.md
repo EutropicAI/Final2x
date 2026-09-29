@@ -6,7 +6,7 @@ Final2x-core is the cross-platform image super-resolution CLI and desktop backen
 
 Install the CLI from PyPI. Desktop builds bundle the matching core where required.
 
-Make sure you have Python >= 3.9 and PyTorch >= 2.0 installed
+Make sure you have Python >= 3.10 and PyTorch >= 2.0 installed
 
 ```shell
 pip install Final2x-core

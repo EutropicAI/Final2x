@@ -42,7 +42,7 @@ xattr -cr /Applications/Final2x.app
 
 ### 🐧 Linux
 
-Install Python >= 3.9 and PyTorch >= 2.0, then install the backend and required system libraries. On Debian or Ubuntu:
+Install Python >= 3.10 and PyTorch >= 2.0, then install the backend and required system libraries. On Debian or Ubuntu:
 
 ```bash
 pip install Final2x-core

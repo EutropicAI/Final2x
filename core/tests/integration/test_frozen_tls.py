@@ -72,19 +72,17 @@ def run_core(
         "use_tile": False,
         "save_format": ".png",
     }
-    # Restrict only this child process, not the machine's trust configuration.
-    # A missing/unreadable system CA must not break the bundled certifi CA.
-    paths = ssl.get_default_verify_paths()
+    # Isolate development-environment CA files without changing system trust.
+    # Native Security.framework validation must not depend on Homebrew or a
+    # bundled PEM file. Keep the OS trust service and keychains accessible.
     denied = [
-        '(subpath "/private/etc/ssl")',
-        '(subpath "/etc/ssl")',
         '(subpath "/opt/homebrew/etc/openssl@3")',
         '(subpath "/usr/local/etc/openssl@3")',
-        f"(literal {json.dumps(paths.openssl_cafile)})",
-        f"(subpath {json.dumps(paths.openssl_capath)})",
+        '(subpath "/private/etc/ssl")',
+        '(subpath "/etc/ssl")',
     ]
     profile = f"(version 1) (allow default) (deny file-read* {' '.join(denied)})"
-    assert shutil.which("sandbox-exec"), "macOS sandbox-exec is required for the missing-system-CA test"
+    assert shutil.which("sandbox-exec"), "macOS sandbox-exec is required to isolate filesystem CA bundles"
     result = subprocess.run(
         ["sandbox-exec", "-p", profile, str(binary), "-j", json.dumps(config), "-n"],
         env=env,
@@ -110,14 +108,20 @@ def downloaded_model(frozen_core: Path, tmp_path_factory: pytest.TempPathFactory
 
 
 @pytest.fixture(scope="module")
-def self_signed_server(downloaded_model: Path, tmp_path_factory: pytest.TempPathFactory) -> Iterator[tuple[str, Path]]:
+def self_signed_server(
+    downloaded_model: Path, tmp_path_factory: pytest.TempPathFactory, request: pytest.FixtureRequest
+) -> Iterator[tuple[str, Path]]:
     directory = tmp_path_factory.mktemp("frozen-tls-server")
+    kind = getattr(request, "param", "valid")
+    ca_certificate = directory / "ca.pem"
+    ca_key = directory / "ca.key"
     certificate = directory / "certificate.pem"
     key = directory / "key.pem"
+    csr = directory / "server.csr"
     config = directory / "openssl.cnf"
     config.write_text(
         "[req]\nprompt=no\ndistinguished_name=dn\nx509_extensions=extensions\n"
-        "[dn]\nCN=localhost\n[extensions]\nsubjectAltName=IP:127.0.0.1,DNS:localhost\n"
+        "[dn]\nCN=Final2x temporary test CA\n[extensions]\n"
         "basicConstraints=critical,CA:TRUE\nkeyUsage=critical,digitalSignature,keyEncipherment,keyCertSign\n"
     )
     subprocess.run(
@@ -131,9 +135,9 @@ def self_signed_server(downloaded_model: Path, tmp_path_factory: pytest.TempPath
             "-days",
             "1",
             "-keyout",
-            str(key),
+            str(ca_key),
             "-out",
-            str(certificate),
+            str(ca_certificate),
             "-config",
             str(config),
         ],
@@ -141,6 +145,79 @@ def self_signed_server(downloaded_model: Path, tmp_path_factory: pytest.TempPath
         capture_output=True,
         timeout=30,
     )
+    subprocess.run(
+        [
+            "openssl",
+            "req",
+            "-new",
+            "-newkey",
+            "rsa:2048",
+            "-nodes",
+            "-keyout",
+            str(key),
+            "-out",
+            str(csr),
+            "-subj",
+            "/CN=localhost",
+        ],
+        check=True,
+        capture_output=True,
+        timeout=30,
+    )
+    extensions = directory / "server.cnf"
+    subject_alt_name = "DNS:wrong-host.invalid" if kind == "wrong-host" else "IP:127.0.0.1,DNS:localhost"
+    extensions.write_text(
+        "basicConstraints=critical,CA:FALSE\nkeyUsage=critical,digitalSignature,keyEncipherment\n"
+        f"extendedKeyUsage=serverAuth\nsubjectAltName={subject_alt_name}\n"
+    )
+    if kind == "expired":
+        (directory / "index.txt").touch()
+        (directory / "serial").write_text("01\n")
+        ca_config = directory / "ca.cnf"
+        ca_config.write_text(
+            "[ca]\ndefault_ca=issuer\n[issuer]\n"
+            f"database={directory / 'index.txt'}\nnew_certs_dir={directory}\nserial={directory / 'serial'}\n"
+            f"certificate={ca_certificate}\nprivate_key={ca_key}\n"
+            "default_md=sha256\npolicy=subject\n[subject]\ncommonName=supplied\n"
+        )
+        sign_command = [
+            "openssl",
+            "ca",
+            "-batch",
+            "-notext",
+            "-config",
+            str(ca_config),
+            "-in",
+            str(csr),
+            "-out",
+            str(certificate),
+            "-extfile",
+            str(extensions),
+            "-startdate",
+            "200101000000Z",
+            "-enddate",
+            "200102000000Z",
+        ]
+    else:
+        sign_command = [
+            "openssl",
+            "x509",
+            "-req",
+            "-in",
+            str(csr),
+            "-CA",
+            str(ca_certificate),
+            "-CAkey",
+            str(ca_key),
+            "-CAcreateserial",
+            "-out",
+            str(certificate),
+            "-days",
+            "1",
+            "-extfile",
+            str(extensions),
+        ]
+    subprocess.run(sign_command, check=True, capture_output=True, timeout=30)
     model_bytes = downloaded_model.read_bytes()
 
     class Handler(BaseHTTPRequestHandler):
@@ -160,15 +237,20 @@ def self_signed_server(downloaded_model: Path, tmp_path_factory: pytest.TempPath
     thread = threading.Thread(target=server.serve_forever, daemon=True)
     thread.start()
     try:
-        yield f"https://127.0.0.1:{server.server_port}/", certificate
+        yield f"https://127.0.0.1:{server.server_port}/", ca_certificate
     finally:
         server.shutdown()
         server.server_close()
         thread.join(timeout=5)
 
 
-def test_frozen_download_without_system_ca(downloaded_model: Path) -> None:
+def test_frozen_download_uses_system_trust_without_ca_files(downloaded_model: Path) -> None:
     assert downloaded_model.stat().st_size > 0
+
+
+def test_frozen_does_not_bundle_ca_certificates(frozen_core: Path) -> None:
+    assert not list(frozen_core.parent.rglob("cacert.pem")), "A static CA bundle was included in the frozen app"
+    assert not list(frozen_core.parent.rglob("certifi")), "certifi was included in the frozen app"
 
 
 def test_frozen_rejects_self_signed_certificate(
@@ -179,7 +261,8 @@ def test_frozen_rejects_self_signed_certificate(
     url, _ = self_signed_server
     result = run_core(frozen_core, tmp_path / "untrusted", url)
     assert result.returncode != 0
-    assert "CERTIFICATE_VERIFY_FAILED" in result.stdout + result.stderr
+    # Security.framework errors are localized and do not use OpenSSL's wording.
+    assert "ssl.SSLCertVerificationError" in result.stdout + result.stderr
     assert not (tmp_path / "untrusted/cache" / MODEL_NAME).exists()
 
 
@@ -193,3 +276,14 @@ def test_frozen_preserves_explicit_custom_ca(
     assert result.returncode == 0, result.stdout + result.stderr
     assert "______SR_COMPLETED______" in result.stderr
     assert (tmp_path / "trusted/output/outputs/2x-gray.png").is_file()
+
+
+@pytest.mark.parametrize("self_signed_server", ["expired", "wrong-host"], indirect=True)
+def test_frozen_rejects_invalid_certificate_even_with_trusted_ca(
+    frozen_core: Path, self_signed_server: tuple[str, Path], tmp_path: Path
+) -> None:
+    url, certificate = self_signed_server
+    result = run_core(frozen_core, tmp_path / "invalid", url, ca_file=certificate)
+    assert result.returncode != 0
+    assert "ssl.SSLCertVerificationError" in result.stdout + result.stderr
+    assert not (tmp_path / "invalid/cache" / MODEL_NAME).exists()

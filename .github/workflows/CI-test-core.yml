@@ -23,6 +23,7 @@ jobs:
     strategy:
       matrix:
         os-version: [windows-latest, ubuntu-latest, macos-14]
+        python-version: ['3.10', '3.11']
 
     runs-on: ${{ matrix.os-version }}
     steps:
@@ -31,7 +32,7 @@ jobs:
       - name: Install uv
         uses: astral-sh/setup-uv@v10.0.1
         with:
-          python-version: '3.11'
+          python-version: ${{ matrix.python-version }}
           enable-cache: false
 
       - name: Install dependencies
@@ -46,7 +47,7 @@ jobs:
           make -C core test
 
       - name: Save coverage report
-        if: matrix.os-version == 'ubuntu-latest'
+        if: matrix.os-version == 'ubuntu-latest' && matrix.python-version == '3.11'
         uses: actions/upload-artifact@v4
         with:
           name: coverage

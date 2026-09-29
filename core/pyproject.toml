@@ -26,7 +26,6 @@ typing = [
 [project]
 authors = [{ name = "Tohrusky" }]
 classifiers = [
-  "Programming Language :: Python :: 3.9",
   "Programming Language :: Python :: 3.10",
   "Programming Language :: Python :: 3.11",
   "Programming Language :: Python :: 3.12",
@@ -35,15 +34,15 @@ classifiers = [
 dependencies = [
   "PyYAML",
   "cccv==0.1.0",
-  "certifi",
   "loguru",
-  "pydantic"
+  "pydantic",
+  "truststore>=0.10.4,<0.11; sys_platform == 'darwin'"
 ]
 description = "core library for Final2x"
 license = "BSD-3-Clause"
 name = "Final2x_core"
 readme = "README.md"
-requires-python = ">=3.9, <4"
+requires-python = ">=3.10, <4"
 version = "4.1.0-dev"
 
 [project.scripts]
