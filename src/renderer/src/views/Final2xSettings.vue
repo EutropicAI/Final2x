@@ -115,6 +115,24 @@ function getPath(): void {
           :options="precisionList"
           style="width: 150px"
         />
+
+        <n-button dashed type="success" style="width: 120px">
+          {{ t('Final2xSettings.text23') }}
+        </n-button>
+
+        <n-switch
+          v-model:value="openOutputFolder"
+          :aria-label="t('Final2xSettings.text23')"
+          size="large"
+          style="height: 35px; width: 76px"
+        >
+          <template #checked>
+            ON
+          </template>
+          <template #unchecked>
+            OFF
+          </template>
+        </n-switch>
       </n-space>
 
       <n-space>
@@ -134,13 +152,7 @@ function getPath(): void {
           {{ t('Final2xSettings.text17') }}
         </n-button>
 
-        <n-switch v-model:value="openOutputFolder" size="large" style="height: 35px; width: 76px">
-          <template #checked>
-            OPEN
-          </template>
-        </n-switch>
-
-        <n-input v-model:value="outputpath" :placeholder="outputpath" round style="width: 308px" />
+        <n-input v-model:value="outputpath" :placeholder="outputpath" round style="width: 396px" />
       </n-space>
     </n-space>
   </n-card>
