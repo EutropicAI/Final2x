@@ -21,7 +21,7 @@ Use built-in models or load your own. See the [custom model demo](https://github
 
 <div align=center>
 <img width="40%" alt="image" src="https://github.com/user-attachments/assets/37f6d444-766b-4c28-b64a-018f78ae1f35" />
-<img width="40%" alt="image" src="https://github.com/user-attachments/assets/c6a278c0-bf11-46a7-9dcc-e5fe97ccc71c" />
+<img width="40%" alt="image" src="https://github.com/user-attachments/assets/3f86e693-f667-48fd-8830-0d96fb5229d2" />
 </div>
 
 ## 📦 Installation
