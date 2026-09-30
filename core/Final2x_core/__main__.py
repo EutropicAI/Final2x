@@ -3,6 +3,9 @@ import os
 import sys
 from pathlib import Path
 
+# Use macOS system trust before network imports to fix TLS failures in frozen builds.
+# Issue: https://github.com/EutropicAI/Final2x/issues/615
+# Fix: https://github.com/EutropicAI/Final2x/pull/716
 if sys.platform == "darwin":
     import truststore
 
