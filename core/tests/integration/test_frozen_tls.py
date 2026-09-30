@@ -37,7 +37,7 @@ def frozen_core() -> Path:
 
 
 def run_core(
-    binary: Path, directory: Path, url: str, *, ca_file: Path | None = None
+    binary: Path, directory: Path, url: str, *, ca_file: Path | None = None, ca_directory: Path | None = None
 ) -> subprocess.CompletedProcess[str]:
     directory.mkdir(parents=True)
     cache = directory / "cache"
@@ -62,6 +62,8 @@ def run_core(
     env["CCCV_REMOTE_MODEL_ZOO"] = url
     if ca_file is not None:
         env["SSL_CERT_FILE"] = str(ca_file)
+    if ca_directory is not None:
+        env["SSL_CERT_DIR"] = str(ca_directory)
     config = {
         "pretrained_model_name": MODEL_NAME,
         "device": "cpu",
@@ -276,6 +278,39 @@ def test_frozen_preserves_explicit_custom_ca(
     assert result.returncode == 0, result.stdout + result.stderr
     assert "______SR_COMPLETED______" in result.stderr
     assert (tmp_path / "trusted/output/outputs/2x-gray.png").is_file()
+
+
+def test_frozen_preserves_explicit_ca_directory(
+    frozen_core: Path,
+    self_signed_server: tuple[str, Path],
+    tmp_path: Path,
+) -> None:
+    url, certificate = self_signed_server
+    directory = tmp_path / "certs"
+    directory.mkdir()
+    shutil.copyfile(certificate, directory / "private-ca.pem")
+    # macOS LibreSSL lacks `rehash` and even returns 0 for that unknown command.
+    # x509 -subject_hash works with both LibreSSL and OpenSSL.
+    ca_hash = subprocess.run(
+        ["openssl", "x509", "-in", str(certificate), "-noout", "-subject_hash"],
+        check=True,
+        capture_output=True,
+        text=True,
+        timeout=30,
+    ).stdout.strip()
+    assert len(ca_hash) == 8
+    (directory / f"{ca_hash}.0").symlink_to("private-ca.pem")
+    result = run_core(frozen_core, tmp_path / "trusted-directory", url, ca_directory=directory)
+    assert result.returncode == 0, result.stdout + result.stderr
+    assert "______SR_COMPLETED______" in result.stderr
+    assert (tmp_path / "trusted-directory/output/outputs/2x-gray.png").is_file()
+
+
+def test_frozen_rejects_missing_ca_directory(frozen_core: Path, tmp_path: Path) -> None:
+    result = run_core(frozen_core, tmp_path / "missing-directory", MODEL_ZOO, ca_directory=tmp_path / "missing")
+    assert result.returncode != 0
+    assert "FileNotFoundError" in result.stdout + result.stderr
+    assert not (tmp_path / "missing-directory/cache" / MODEL_NAME).exists()
 
 
 @pytest.mark.parametrize("self_signed_server", ["expired", "wrong-host"], indirect=True)
