@@ -3,9 +3,10 @@ import os
 import sys
 from pathlib import Path
 
-from Final2x_core.certificates import configure_ssl_certificates
+if sys.platform == "darwin":
+    import truststore
 
-configure_ssl_certificates()
+    truststore.inject_into_ssl()
 
 from loguru import logger
 

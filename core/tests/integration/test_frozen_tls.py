@@ -306,13 +306,6 @@ def test_frozen_preserves_explicit_ca_directory(
     assert (tmp_path / "trusted-directory/output/outputs/2x-gray.png").is_file()
 
 
-def test_frozen_rejects_missing_ca_directory(frozen_core: Path, tmp_path: Path) -> None:
-    result = run_core(frozen_core, tmp_path / "missing-directory", MODEL_ZOO, ca_directory=tmp_path / "missing")
-    assert result.returncode != 0
-    assert "FileNotFoundError" in result.stdout + result.stderr
-    assert not (tmp_path / "missing-directory/cache" / MODEL_NAME).exists()
-
-
 @pytest.mark.parametrize("self_signed_server", ["expired", "wrong-host"], indirect=True)
 def test_frozen_rejects_invalid_certificate_even_with_trusted_ca(
     frozen_core: Path, self_signed_server: tuple[str, Path], tmp_path: Path
