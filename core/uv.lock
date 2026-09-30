@@ -304,7 +304,7 @@ wheels = [
 
 [[package]]
 name = "final2x-core"
-version = "4.1.0.dev0"
+version = "4.1.0"
 source = { editable = "." }
 dependencies = [
     { name = "cccv" },
@@ -324,6 +324,7 @@ dev = [
     { name = "torchvision", version = "0.22.1", source = { registry = "https://download.pytorch.org/whl/cu128" }, marker = "platform_machine == 'aarch64' and sys_platform == 'linux'" },
     { name = "torchvision", version = "0.22.1", source = { registry = "https://pypi.org/simple" }, marker = "sys_platform == 'darwin'" },
     { name = "torchvision", version = "0.22.1+cu128", source = { registry = "https://download.pytorch.org/whl/cu128" }, marker = "(platform_machine != 'aarch64' and sys_platform == 'linux') or (sys_platform != 'darwin' and sys_platform != 'linux')" },
+    { name = "truststore", marker = "sys_platform == 'darwin'" },
 ]
 test = [
     { name = "coverage" },
@@ -345,7 +346,7 @@ requires-dist = [
     { name = "loguru" },
     { name = "pydantic" },
     { name = "pyyaml" },
-    { name = "truststore", marker = "sys_platform == 'darwin'", specifier = ">=0.10.4,<0.11" },
+    { name = "truststore", marker = "sys_platform == 'darwin'" },
 ]
 
 [package.metadata.requires-dev]
@@ -357,6 +358,7 @@ dev = [
     { name = "torch", marker = "sys_platform == 'darwin'", specifier = "~=2.7.1" },
     { name = "torchvision", marker = "sys_platform != 'darwin'", specifier = "~=0.22.1", index = "https://download.pytorch.org/whl/cu128" },
     { name = "torchvision", marker = "sys_platform == 'darwin'", specifier = "~=0.22.1" },
+    { name = "truststore", marker = "sys_platform == 'darwin'", specifier = ">=0.10.4,<0.11" },
 ]
 test = [
     { name = "coverage" },
