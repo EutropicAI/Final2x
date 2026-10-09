@@ -1,0 +1,32 @@
+export const tr = {
+  MyProgress: {
+    text0: 'İşlem başlatıldı',
+    text1: 'İşlem devam ediyor',
+    text2: 'Lütfen bir görüntü ekleyin',
+    text3: 'Görüntü listesi boş',
+    text4: 'İşlem sonlandırıldı',
+    text5: 'İşlem başarısız oldu, atlanıyor',
+    text6: 'BAŞLAT',
+    text7: 'SONLANDIR',
+    text8: 'GÜNLÜK',
+    text9: 'İşlem başarısız oldu',
+    text10: 'Hata mesajını görmek için günlüğe tıklayın',
+  },
+  Final2xHome: {
+    text0: 'Kaldırma başarılı',
+    text1: 'Görüntüleri veya klasörleri yüklemek için buraya tıklayın ya da sürükleyip bırakın',
+  },
+  Final2xSettings: {
+    text10: 'Cihaz',
+    text11: 'Model',
+    text15: 'Özel ölçek',
+    text16: 'Varsayılan',
+    text17: 'Çıktı klasörü',
+    text18: 'Proxy',
+    text19: 'Biçim',
+    text20: 'Parçalı işleme',
+    text21: 'Hassasiyet',
+    text23: 'Otomatik aç',
+    text22: 'FP16 ekran belleğinden tasarruf sağlar ancak bazı modellerde taşmaya neden olabilir. BF16, desteklenen cihazlarda daha geniş bir sayısal aralığa sahiptir; desteklenmediğinde FP32\'ye geri dönebilir.',
+  },
+}
