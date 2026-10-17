@@ -18,6 +18,8 @@ describe('switchLanguage', () => {
     // 断言语言切换是否正确
     expect(langsNum.value).toBe(0) // 初始语言是 'en', 所以切换一次后应该是 'zh', 切换两次后应该是 'ja', 切换三次后应该是 'en'
     const numLang = getLanguage(0).numLang
+    expect(getLanguage(4).lang).toBe('tr')
+    expect(numLang).toBe(5)
     for (let i = 0; i < 30; i++) {
       expect(langsNum.value).toBe(i % numLang)
       switchLanguage()
