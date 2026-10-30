@@ -72,7 +72,7 @@ jobs:
           path: dist/win-unpacked/Final2x-windows-x64-unpacked.7z
 
   macos:
-    runs-on: macos-14
+    runs-on: macos-15
     steps:
       - uses: actions/checkout@v4
 
