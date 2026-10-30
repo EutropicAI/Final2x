@@ -44,7 +44,7 @@
     "tree-kill": "^1.2.2",
     "vfonts": "^0.0.3",
     "vue": "^3.5.22",
-    "vue-i18n": "^11.1.12",
+    "vue-i18n": "^11.4.14",
     "vue-router": "^4.5.1"
   },
   "devDependencies": {
