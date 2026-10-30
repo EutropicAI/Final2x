@@ -22,7 +22,7 @@ jobs:
   pytest:
     strategy:
       matrix:
-        os-version: [windows-latest, ubuntu-latest, macos-14]
+        os-version: [windows-latest, ubuntu-latest, macos-15]
         python-version: ['3.10', '3.11']
 
     runs-on: ${{ matrix.os-version }}
@@ -72,7 +72,7 @@ jobs:
   build:
     strategy:
       matrix:
-        os-version: [windows-latest, ubuntu-latest, macos-14]
+        os-version: [windows-latest, ubuntu-latest, macos-15]
 
     runs-on: ${{ matrix.os-version }}
     steps:
@@ -115,7 +115,7 @@ jobs:
     needs: [build]
     strategy:
       matrix:
-        os-version: [windows-latest, ubuntu-latest, macos-14]
+        os-version: [windows-latest, ubuntu-latest, macos-15]
 
     runs-on: ${{ matrix.os-version }}
     steps:
@@ -144,12 +144,12 @@ jobs:
           ./Final2x-core
 
       - uses: actions/setup-python@v5
-        if: matrix.os-version == 'macos-14'
+        if: matrix.os-version == 'macos-15'
         with:
           python-version: '3.11'
 
       - name: Test frozen macOS TLS
-        if: matrix.os-version == 'macos-14'
+        if: matrix.os-version == 'macos-15'
         env:
           FINAL2X_TEST_BINARY: ${{ github.workspace }}/core/dist/Final2x-core/Final2x-core
         run: |
