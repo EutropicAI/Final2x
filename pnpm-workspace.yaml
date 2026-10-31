@@ -4,5 +4,7 @@ packages:
 overrides:
   '@parcel/watcher': npm:empty-npm-package@1.0.0
 
-onlyBuiltDependencies:
-  - electron
+allowBuilds:
+  electron: true
+  electron-winstaller: false
+  esbuild: false

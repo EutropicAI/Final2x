@@ -27,14 +27,11 @@ jobs:
       - name: Check shared version
         run: python scripts/check_version.py
 
-      - uses: actions/setup-node@v4
+      - uses: pnpm/setup@v3
         with:
-          node-version: 22
-
-      - uses: pnpm/action-setup@v4
-
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+          runtime: node@24
+          cache: true
+          require-lockfile: true
 
       - name: Lint
         run: pnpm run lint

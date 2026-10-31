@@ -39,11 +39,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: actions/setup-node@v4
+      - uses: pnpm/setup@v3
         with:
-          node-version: 22
-
-      - uses: pnpm/action-setup@v4
+          runtime: node@24
+          cache: true
+          require-lockfile: true
 
       - name: Install uv
         uses: astral-sh/setup-uv@v10.0.1
@@ -51,10 +51,8 @@ jobs:
           python-version: '3.11'
           enable-cache: false
 
-      - name: Install dependencies
-        run: |
-          pnpm install --frozen-lockfile
-          uv sync --project core --locked --no-default-groups --group dev
+      - name: Install core dependencies
+        run: uv sync --project core --locked --no-default-groups --group dev
 
       - name: Build bundled core
         run: |
@@ -88,11 +86,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: actions/setup-node@v4
+      - uses: pnpm/setup@v3
         with:
-          node-version: 22
-
-      - uses: pnpm/action-setup@v4
+          runtime: node@24
+          cache: true
+          require-lockfile: true
 
       - name: Install uv
         uses: astral-sh/setup-uv@v10.0.1
@@ -100,10 +98,8 @@ jobs:
           python-version: '3.11'
           enable-cache: false
 
-      - name: Install dependencies
-        run: |
-          pnpm install --frozen-lockfile
-          uv sync --project core --locked --no-default-groups --group dev
+      - name: Install core dependencies
+        run: uv sync --project core --locked --no-default-groups --group dev
 
       - name: Build bundled core
         run: |
@@ -144,14 +140,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: actions/setup-node@v4
+      - uses: pnpm/setup@v3
         with:
-          node-version: 22
-
-      - uses: pnpm/action-setup@v4
-
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+          runtime: node@24
+          cache: true
+          require-lockfile: true
 
       - name: Build desktop app
         run: pnpm run build:linux-x64
