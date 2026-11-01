@@ -6,5 +6,5 @@ overrides:
 
 allowBuilds:
   electron: true
-  electron-winstaller: false
-  esbuild: false
+  electron-winstaller: true
+  esbuild: true
