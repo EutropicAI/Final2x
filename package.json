@@ -6,10 +6,12 @@
   "author": "Tohrusky",
   "homepage": "https://github.com/EutropicAI/Final2x",
   "main": "./out/main/index.js",
-  "engines": {
-    "node": ">=22.12.0"
-  },
   "devEngines": {
+    "runtime": {
+      "name": "node",
+      "version": ">=24",
+      "onFail": "warn"
+    },
     "packageManager": {
       "name": "pnpm",
       "version": ">=12.0.0",
