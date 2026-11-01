@@ -71,14 +71,14 @@ omit = [
 [tool.hatch.build.sources]
 "Final2x_core" = "Final2x_core"
 
-[tool.hatch.metadata]
-allow-direct-references = true
-
 [tool.hatch.build.targets.sdist]
 include = ["Final2x_core"]
 
 [tool.hatch.build.targets.wheel]
 include = ["Final2x_core"]
+
+[tool.hatch.metadata]
+allow-direct-references = true
 
 [tool.mypy]
 disable_error_code = "attr-defined"

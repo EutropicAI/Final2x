@@ -15,12 +15,16 @@ repos:
     rev: v4.0.0-alpha.8
     hooks:
       - id: prettier
+        language_version: 24.20.0
 
   - repo: https://github.com/macisamuele/language-formatters-pre-commit-hooks
     rev: v2.15.0
     hooks:
       - id: pretty-format-toml
         language_version: python
+        additional_dependencies:
+          - toml-sort==0.25.0
+          - tomlrt==2.3.3
         args: [--autofix]
         exclude: ^core/uv\.lock$
 
