@@ -151,20 +151,10 @@ vite.config.ts.timestamp-*
 # Turbo Repo
 .turbo
 
-node_modules
-.pnpm-store/
-dist
-out
-*.log*
+# OS and editor files
 *.DS_Store
+/.idea/
+
+# Final2x resources and output
 /resources/Final2x-core/
 /outputs/
-/.idea
-/coverage/
-/.coverage
-/*.spec
-/core/.venv/
-/core/build/
-/core/dist/
-/core/coverage.xml
-/core/htmlcov/
