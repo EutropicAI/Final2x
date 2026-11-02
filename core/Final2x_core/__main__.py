@@ -41,9 +41,9 @@ def open_folder(path: str) -> None:
         if sys.platform.startswith("win"):
             os.startfile(path)
         elif sys.platform.startswith("darwin"):
-            os.system('open "{}"'.format(path))
+            os.system(f'open "{path}"')
         elif sys.platform.startswith("linux"):
-            os.system('xdg-open "{}"'.format(path))
+            os.system(f'xdg-open "{path}"')
         else:
             logger.error("cannot open output folder")
     except Exception as e:

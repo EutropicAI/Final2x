@@ -3,8 +3,10 @@ packages:
 
 overrides:
   '@parcel/watcher': npm:empty-npm-package@1.0.0
+  # yauzl 2.x can silently stop Electron extraction on recent Node 24 and Node 26 releases.
+  'extract-zip>yauzl': 3.4.0
 
 allowBuilds:
   electron: true
-  electron-winstaller: false
-  esbuild: false
+  electron-winstaller: true
+  esbuild: true

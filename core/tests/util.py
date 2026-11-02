@@ -38,7 +38,7 @@ def calculate_image_similarity(image1: np.ndarray, image2: np.ndarray) -> bool:
     (score, _) = structural_similarity(grayscale_image1, grayscale_image2, full=True)
     print("img1.shape: ", image1.shape)
     print("img2.shape: ", image2.shape)
-    print("SSIM: {}".format(score))
+    print(f"SSIM: {score}")
     return score > 0.8
 
 

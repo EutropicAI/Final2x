@@ -71,14 +71,14 @@ omit = [
 [tool.hatch.build.sources]
 "Final2x_core" = "Final2x_core"
 
-[tool.hatch.metadata]
-allow-direct-references = true
-
 [tool.hatch.build.targets.sdist]
 include = ["Final2x_core"]
 
 [tool.hatch.build.targets.wheel]
 include = ["Final2x_core"]
+
+[tool.hatch.metadata]
+allow-direct-references = true
 
 [tool.mypy]
 disable_error_code = "attr-defined"
@@ -117,7 +117,14 @@ extend-ignore = [
   "RUF003",
   "E402",
   "RUF002",
-  "B904"
+  "B904",
+  "BLE001",  # Keep existing broad exception handling.
+  "TRY002",  # Keep existing generic exception types.
+  "N999",  # Keep existing module and package names.
+  "UP006",  # Keep typing.List and other typing generics.
+  "UP007",  # Keep typing.Union annotations.
+  "UP035",  # Keep legacy typing imports.
+  "UP045"  # Keep typing.Optional annotations.
 ]
 extend-select = [
   "I",  # isort
