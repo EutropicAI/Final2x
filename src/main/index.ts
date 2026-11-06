@@ -26,7 +26,7 @@ function createWindow(): void {
   })
 
   if (process.platform === 'darwin') {
-    app.dock.setIcon(nativeImage.createFromPath(appIcon))
+    app.dock?.setIcon(nativeImage.createFromPath(appIcon))
   }
 
   // mainWindow

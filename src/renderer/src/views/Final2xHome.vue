@@ -73,7 +73,7 @@ onMounted(() => {
     const files = e.dataTransfer?.files
 
     if (files && files.length > 0) {
-      const path = files[0].path // Get file path, the path is absolute path, electron can use directly
+      const path = window.api.getPathForFile(files[0]) // Get file path, the path is absolute path, electron can use directly
       console.log(path)
       pathFormat.setRootPath(path)
       console.log(pathFormat.getRootPath())
@@ -158,7 +158,7 @@ function handleRemove(options: { file: UploadFileInfo, fileList: Array<UploadFil
   flex-direction: column;
 }
 
-.n-upload :deep .n-upload-file-list {
+.n-upload :deep(.n-upload-file-list) {
   max-height: calc(100vh - 370px);
   overflow-y: auto;
   overflow-x: hidden;
