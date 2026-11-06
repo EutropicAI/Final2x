@@ -15,8 +15,11 @@ export async function openDirectory(_, p: Array<'openFile' | 'openDirectory' | '
     if (canceled)
       return []
 
-    if (filePaths.length > 0)
-      lastUsedPath = path.dirname(filePaths[0])
+    if (filePaths.length > 0) {
+      lastUsedPath = p.includes('openDirectory')
+        ? filePaths[0]
+        : path.dirname(filePaths[0])
+    }
 
     return filePaths
   }
