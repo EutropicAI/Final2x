@@ -2,13 +2,12 @@
   "extends": "@electron-toolkit/tsconfig/tsconfig.node.json",
   "compilerOptions": {
     "composite": true,
-    "baseUrl": ".",
     "paths": {
       "@main/*": [
-        "src/main/*"
+        "./src/main/*"
       ],
       "@shared/*": [
-        "src/shared/*"
+        "./src/shared/*"
       ]
     },
     "types": ["electron-vite/node"]

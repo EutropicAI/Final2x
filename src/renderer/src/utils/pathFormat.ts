@@ -12,7 +12,9 @@ class PathFormat {
     const segments = path.split(/[/\\]/)
     if (segments.length > 1) {
       segments.pop()
-      this.rootpath = segments.join(path.startsWith('/') ? '/' : '\\')
+      this.rootpath = segments.join(path.startsWith('/')
+        ? '/'
+        : '\\')
     }
   }
 
@@ -28,7 +30,9 @@ class PathFormat {
    */
   getNewPath(path: string): string {
     const segments = path.split(/[/\\]/)
-    return this.rootpath + segments.join(this.rootpath.startsWith('/') ? '/' : '\\')
+    return this.rootpath + segments.join(this.rootpath.startsWith('/')
+      ? '/'
+      : '\\')
   }
 
   /**

@@ -7,6 +7,5 @@ overrides:
   'extract-zip>yauzl': 3.4.0
 
 allowBuilds:
-  electron: true
   electron-winstaller: true
   esbuild: true
