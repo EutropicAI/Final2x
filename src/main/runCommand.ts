@@ -15,7 +15,11 @@ export async function runCommand(event: IpcMainEvent, coreConfig: Final2xCoreCon
   config_json = Buffer.from(config_json, 'utf8').toString('base64')
 
   const resourceUrl = getCorePath()
-  const args = [...getCoreArgs(), '-b', config_json]
+  const args = [
+    ...getCoreArgs(),
+    '-b',
+    config_json,
+  ]
 
   if (!coreConfig.options.open_output_folder)
     args.push('-n')

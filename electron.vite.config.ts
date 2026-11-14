@@ -1,6 +1,6 @@
 import { resolve } from 'node:path'
 import vue from '@vitejs/plugin-vue'
-import { defineConfig, externalizeDepsPlugin } from 'electron-vite'
+import { defineConfig } from 'electron-vite'
 
 export default defineConfig({
   main: {
@@ -10,11 +10,8 @@ export default defineConfig({
         '@shared': resolve('src/shared'),
       },
     },
-    plugins: [externalizeDepsPlugin()],
   },
-  preload: {
-    plugins: [externalizeDepsPlugin()],
-  },
+  preload: {},
   renderer: {
     resolve: {
       alias: {
@@ -22,6 +19,8 @@ export default defineConfig({
         '@shared': resolve('src/shared'),
       },
     },
-    plugins: [vue()],
+    plugins: [
+      vue(),
+    ],
   },
 })

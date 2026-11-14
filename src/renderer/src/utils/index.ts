@@ -26,8 +26,8 @@ class Utils {
    * @param miliseconds 等待时间，单位毫秒
    */
   static DeepDeepSleep(miliseconds: number): void {
-    const currentTime = new Date().getTime()
-    while (currentTime + miliseconds >= new Date().getTime()) {
+    const currentTime = Date.now()
+    while (currentTime + miliseconds >= Date.now()) {
       /* empty */
     }
   }

@@ -1,8 +1,10 @@
 import { electronAPI } from '@electron-toolkit/preload'
-import { contextBridge } from 'electron'
+import { contextBridge, webUtils } from 'electron'
 
 // Custom APIs for renderer
-const api = {}
+const api = {
+  getPathForFile: (file: File): string => webUtils.getPathForFile(file),
+}
 
 // Use `contextBridge` APIs to expose Electron APIs to
 // renderer only if context isolation is enabled, otherwise

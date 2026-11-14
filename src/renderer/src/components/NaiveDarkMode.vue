@@ -207,10 +207,16 @@ function hexToRgb(hex: string): { r: number, g: number, b: number } {
 function switchCSSStyle(mode: NaiveDarkModeType): void {
   if (mode === 'system') {
     const osThemeRef = useOsTheme()
-    mode = osThemeRef.value === 'dark' ? 'dark' : 'light'
+    mode = osThemeRef.value === 'dark'
+      ? 'dark'
+      : 'light'
   }
-  const targetColor = mode === 'dark' ? DesignDarkColor.value : DesignLightColor.value
-  const initialColor = mode === 'dark' ? DesignLightColor.value : DesignDarkColor.value
+  const targetColor = mode === 'dark'
+    ? DesignDarkColor.value
+    : DesignLightColor.value
+  const initialColor = mode === 'dark'
+    ? DesignLightColor.value
+    : DesignDarkColor.value
   const layer = Math.ceil(FadeLayer.value)
 
   if (layer < 1) {

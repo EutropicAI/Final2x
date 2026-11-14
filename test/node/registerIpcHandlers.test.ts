@@ -9,12 +9,20 @@ const { on, handle, fromWebContents } = vi.hoisted(() => ({
 }))
 
 vi.mock('electron', () => ({
-  app: { hide: vi.fn(), quit: vi.fn() },
+  app: {
+    hide: vi.fn(),
+    quit: vi.fn(),
+  },
   BrowserWindow: { fromWebContents },
   ipcMain: { on, handle },
 }))
-vi.mock('@main/runCommand', () => ({ runCommand: vi.fn(), killCommand: vi.fn() }))
-vi.mock('@main/openDirectory', () => ({ openDirectory: vi.fn() }))
+vi.mock('@main/runCommand', () => ({
+  runCommand: vi.fn(),
+  killCommand: vi.fn(),
+}))
+vi.mock('@main/openDirectory', () => ({
+  openDirectory: vi.fn(),
+}))
 
 describe('registerIpcHandlers', () => {
   it('registers each channel only once when a window is recreated', () => {
@@ -32,7 +40,12 @@ describe('registerIpcHandlers', () => {
     const minimize = on.mock.calls.find(([channel]) => channel === IpcChannelSend.MINIMIZE)?.[1]
     const maximize = on.mock.calls.find(([channel]) => channel === IpcChannelSend.MAXIMIZE)?.[1]
     const sender = {}
-    const newWindow = { minimize: vi.fn(), isMaximized: vi.fn(() => false), maximize: vi.fn(), restore: vi.fn() }
+    const newWindow = {
+      minimize: vi.fn(),
+      isMaximized: vi.fn(() => false),
+      maximize: vi.fn(),
+      restore: vi.fn(),
+    }
     fromWebContents.mockReturnValue(newWindow)
 
     minimize({ sender })

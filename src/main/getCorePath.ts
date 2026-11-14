@@ -18,13 +18,21 @@ export function getCorePath(): string {
     app.getAppPath(),
     '..',
     'Final2x-core',
-    process.platform === 'win32' ? 'Final2x-core.exe' : 'Final2x-core',
+    process.platform === 'win32'
+      ? 'Final2x-core.exe'
+      : 'Final2x-core',
   )
 }
 
 export function getCoreArgs(): string[] {
-  if (process.env.NODE_ENV === 'development')
-    return ['run', '--project', path.join(app.getAppPath(), 'core'), 'Final2x-core']
+  if (process.env.NODE_ENV === 'development') {
+    return [
+      'run',
+      '--project',
+      path.join(app.getAppPath(), 'core'),
+      'Final2x-core',
+    ]
+  }
 
   return []
 }

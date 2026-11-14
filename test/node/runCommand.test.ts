@@ -12,7 +12,9 @@ vi.mock('@main/getCorePath', () => ({
 describe('runCommand', () => {
   it('reports a missing core executable and unlocks the renderer', async () => {
     const send = vi.fn()
-    const event = { sender: { send } } as unknown as IpcMainEvent
+    const event = {
+      sender: { send },
+    } as unknown as IpcMainEvent
     const coreConfig: Final2xCoreConfig = {
       config: {
         pretrained_model_name: 'test.pth',

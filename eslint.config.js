@@ -27,16 +27,25 @@ export default antfu(
   {
     files: ['**/*.yaml', '**/*.yml'],
     rules: {
+      'pnpm/yaml-enforce-settings': 'off',
       'yaml/plain-scalar': 'off',
     },
   },
   {
     files: ['**/*.ts'],
     rules: {
-      '@typescript-eslint/ban-ts-comment': ['error', { 'ts-ignore': 'allow-with-description' }],
+      '@typescript-eslint/ban-ts-comment': [
+        'error',
+        { 'ts-ignore': 'allow-with-description' },
+      ],
       '@typescript-eslint/explicit-function-return-type': 'error',
       '@typescript-eslint/explicit-module-boundary-types': 'off',
-      '@typescript-eslint/no-empty-function': ['error', { allow: ['arrowFunctions'] }],
+      '@typescript-eslint/no-empty-function': [
+        'error',
+        {
+          allow: ['arrowFunctions'],
+        },
+      ],
       '@typescript-eslint/no-explicit-any': ['off'],
       '@typescript-eslint/no-non-null-assertion': 'off',
       '@typescript-eslint/no-var-requires': 'off',
@@ -47,10 +56,18 @@ export default antfu(
   {
     files: ['**/*.vue'],
     rules: {
-      '@typescript-eslint/ban-ts-comment': ['error', { 'ts-ignore': 'allow-with-description' }],
+      '@typescript-eslint/ban-ts-comment': [
+        'error',
+        { 'ts-ignore': 'allow-with-description' },
+      ],
       '@typescript-eslint/explicit-function-return-type': 'error',
       '@typescript-eslint/explicit-module-boundary-types': 'off',
-      '@typescript-eslint/no-empty-function': ['error', { allow: ['arrowFunctions'] }],
+      '@typescript-eslint/no-empty-function': [
+        'error',
+        {
+          allow: ['arrowFunctions'],
+        },
+      ],
       '@typescript-eslint/no-explicit-any': ['off'],
       '@typescript-eslint/no-non-null-assertion': 'off',
       '@typescript-eslint/no-var-requires': 'off',
